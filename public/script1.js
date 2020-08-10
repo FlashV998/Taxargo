@@ -24,15 +24,32 @@ document.addEventListener("DOMContentLoaded", () => {
     //hidding functions step:4
    
     $("#show-button-4-1").click(function(){
-        $("#show-4-1").show(200);
+        $("#show-4-1").toggle(200);
          $("#show-button-4-1").hide();
       
       });
 
       $("#show-button-5-1").click(function(){
-           $(".show-5-1").toggle(200);
+           $(".show-5-1cont").toggle(200);
             // $("#show-button-5-1").hide();
             });
+
+            $("#show-button-5-3").click(function(){
+                 $(".show-5-3cont").toggle(200);
+                  // $("#show-button-5-1").hide();
+                  });
+
+                  $("#show-button-5-0").click(function(){
+                       $(".show-5-0cont").toggle(200);
+                        // $("#show-button-5-1").hide();
+                        });
+
+                  $("#show-button-7-1").click(function(){
+                       $(".show-7-1cont").toggle(200);
+                        // $("#show-button-5-1").hide();
+                        });
+      
+
 
       $(document).on('change', '.div-toggle', function() {
          var target = $(this).data('target');

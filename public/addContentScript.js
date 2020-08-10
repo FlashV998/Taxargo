@@ -12,15 +12,39 @@ $(document).ready(function(){
 
 
         $("#addCost").click(function(){
-            $(".show-5-1").append('<div class="form-row  justify-content-around "><div class="form-group col-md-4"><label for="firstname">Description</label><input type="fname" class="form-control" id="firstname" required placeholder="firstname"></div><div class="form-group col-md-4"><label for="middlename">Amount</label><input type="mname" class="form-control" id="middlename" required placeholder="middlename"></div><div class="form-group col-md-2" ><a class="btn delete-cost col-md-1"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></div>')
+            $(".show-5-1").append('<div class="form-row  justify-content-around "><div class="form-group col-md-4"><label for="firstname">Description</label><input type="fname" class="form-control" id="firstname" required placeholder="firstname"></div><div class="form-group col-md-4"><label for="middlename">Amount</label><input type="mname" class="form-control" id="middlename" required placeholder="middlename"></div><div class="form-group col-md-2" ><a class="btn delete-cost-1 col-md-1"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></div>')
                 });
         
-                $(".show-5-1").on("click",'.delete-cost', function() {
+                $(".show-5-1").on("click",'.delete-cost-1', function() {
                     $(this).parent('div').parent('div').remove();
                 });
 
+                $("#addCost-2").click(function(){
+                    $(".show-5-3").append('<div class="form-row  justify-content-around "><div class="form-group col-md-4"><label for="firstname">Description</label><input type="fname" class="form-control" id="firstname" required placeholder="firstname"></div><div class="form-group col-md-4"><label for="middlename">Amount</label><input type="mname" class="form-control" id="middlename" required placeholder="middlename"></div><div class="form-group col-md-2" ><a class="btn delete-cost-2 col-md-1"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></div>')
+                        });
+                
+                        $(".show-5-3").on("click",'.delete-cost-2', function() {
+                            $(this).parent('div').parent('div').remove();
+                        });
+        
+
+
+
+
+                $("#addBuyer").click(function(){
+                    $(".show-5-2").append(' <div class="form-row"><div class="form-group col-md-2"><label for="inputAddress">Name</label><input type="text" class="form-control"  required></div><div class="form-group col-md-2"><label for="inputAddress2">PAN</label><input type="text" class="form-control"  required></div><div class="form-group col-md-2"><label for="inputAddress2">% Ownership</label><input type="text" class="form-control" required></div><div class="form-group col-md-2"><label for="inputAddress2">Amount Paid</label><input type="text" class="form-control" required></div><div class="form-group col-md-4" ><a class="btn delete-owner col-md-1"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></div>')
+                        });
+                
+                        $(".show-5-2").on("click",'.delete-owner', function() {
+                            $(this).parent('div').parent('div').remove();
+                        });
+
 });
 
+const progress = document.querySelector('.progress-done');
+
+progress.style.width = progress.getAttribute('data-done') + '%';
+progress.style.opacity = 1;
 
 
 

@@ -84,31 +84,43 @@ background-color:#94fc13;
   color:#00005c;
   text-align: center; 
   text-transform: uppercase;
+  font-size:30px;
 }
 .heading-content{
   text-align: center;
+  font-size: large;
   margin:2rem auto;
   text-transform: uppercase;
   text-decoration: underline ;
 }
 
+.gap{margin: 6rem auto;}
 .heading-label{
   color:#1b6ca8;
-  font-weight: bold;
+  font-weight: 600;
+text-align: left;
   /* text-transform: uppercase; */
 }
 
+
 .heading-info{
   color: #e84a5f;
-  text-align: center;
+  text-align: left;
 
 }
 /* generally para tags */
 .heading-description{
-font-weight:300;
-font-size: small;
+font-weight:400;
+font-size: medium;
 color: #323232;
+text-align: left;
 }
+.heading-description-1{
+  font-weight:300;
+  font-size: small;
+  color: #323232;
+  text-align: left;
+  }
 /* Heading */
 
 .hide{
@@ -118,6 +130,10 @@ color: #323232;
 
  
  /* INTRO TABS */
+
+ .inner-section-step{
+  margin-top: 8rem;
+ }
 
 a.introTab{font-size: 14px;
       font-weight: 700;
@@ -130,12 +146,246 @@ a:hover{
   /* INTRO TABS */
 
 
+
+  .progress {
+    background-color: #d8d8d8;
+    border-radius: 20px;
+    /* position: relative;
+    margin: 15px 0; */
+    height: 30px;
+    /* width:  300px; */
+  }
+  
+  .progress-done {
+    background: linear-gradient(to left, #F2709C, #FF9472);
+    box-shadow: 0 3px 3px -5px #F2709C, 0 2px 5px #F2709C;
+    border-radius: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 0;
+    opacity: 0;
+    transition: 1s ease 0.3s;
+  }
+
+
   /* INPUT AND LABEL FROM CSS */
 
+.step-shadow-box{
+  background: #fff;
+  border-radius: 2px;
+  }  /* margin: 1rem; */
+    /* position: relative; */
+    /* width: 300px; */
+   
+.step-shadow-box-1{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.step-shadow-box-1:hover{
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
 
 
-
-
+/*===========================
+        09.NAVBAR css 
+===========================*/
+.navbar-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 0;
+  z-index: 99; }
+  .navbar-area .navbar {
+    position: relative;
+    padding: 0; }
+    .navbar-area .navbar .navbar-toggler .toggler-icon {
+      width: 30px;
+      height: 2px;
+      background-color: #fff;
+      margin: 5px 0;
+      display: block;
+      position: relative;
+      -webkit-transition: all 0.3s ease-out 0s;
+      -moz-transition: all 0.3s ease-out 0s;
+      -ms-transition: all 0.3s ease-out 0s;
+      -o-transition: all 0.3s ease-out 0s;
+      transition: all 0.3s ease-out 0s; }
+    .navbar-area .navbar .navbar-toggler.active .toggler-icon:nth-of-type(1) {
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+      top: 7px; }
+    .navbar-area .navbar .navbar-toggler.active .toggler-icon:nth-of-type(2) {
+      opacity: 0; }
+    .navbar-area .navbar .navbar-toggler.active .toggler-icon:nth-of-type(3) {
+      -webkit-transform: rotate(135deg);
+      -moz-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+      -o-transform: rotate(135deg);
+      transform: rotate(135deg);
+      top: -7px; }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .navbar-area .navbar .navbar-collapse {
+        position: absolute;
+        top: 115%;
+        left: 0;
+        width: 100%;
+        background-color: #f4f6f7;
+        z-index: 8;
+        padding: 10px 0;
+        -webkit-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
+        -moz-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
+        box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05); } }
+    @media (max-width: 767px) {
+      .navbar-area .navbar .navbar-collapse {
+        position: absolute;
+        top: 115%;
+        left: 0;
+        width: 100%;
+        background-color: #f4f6f7;
+        z-index: 8;
+        padding: 10px 0;
+        -webkit-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
+        -moz-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
+        box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05); } }
+    .navbar-area .navbar .navbar-nav .nav-item {
+      margin: 0 16px;
+      position: relative; }
+      .navbar-area .navbar .navbar-nav .nav-item a {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+        padding: 26px 0;
+        color: #fff;
+        text-transform: uppercase;
+        position: relative;
+        opacity: 0.8;
+        -webkit-transition: all 0.3s ease-out 0s;
+        -moz-transition: all 0.3s ease-out 0s;
+        -ms-transition: all 0.3s ease-out 0s;
+        -o-transition: all 0.3s ease-out 0s;
+        transition: all 0.3s ease-out 0s; }
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+          .navbar-area .navbar .navbar-nav .nav-item a {
+            padding: 10px 0;
+            display: block;
+            color: #121212; } }
+        @media (max-width: 767px) {
+          .navbar-area .navbar .navbar-nav .nav-item a {
+            padding: 10px 0;
+            display: block;
+            color: #121212; } }
+        .navbar-area .navbar .navbar-nav .nav-item a::before {
+          position: absolute;
+          content: '';
+          width: 32px;
+          height: 4px;
+          background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.1) 0%, white 100%);
+          background: -o-linear-gradient(left, rgba(255, 255, 255, 0.1) 0%, white 100%);
+          background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, white 100%);
+          left: 50%;
+          margin: 0 2px;
+          bottom: 14px;
+          -webkit-transition: all 0.3s ease-out 0s;
+          -moz-transition: all 0.3s ease-out 0s;
+          -ms-transition: all 0.3s ease-out 0s;
+          -o-transition: all 0.3s ease-out 0s;
+          transition: all 0.3s ease-out 0s;
+          -webkit-transform: translate(-50%) scaleX(0);
+          -moz-transform: translate(-50%) scaleX(0);
+          -ms-transform: translate(-50%) scaleX(0);
+          -o-transform: translate(-50%) scaleX(0);
+          transform: translate(-50%) scaleX(0); }
+          @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .navbar-area .navbar .navbar-nav .nav-item a::before {
+              display: none; } }
+          @media (max-width: 767px) {
+            .navbar-area .navbar .navbar-nav .nav-item a::before {
+              display: none; } }
+      .navbar-area .navbar .navbar-nav .nav-item.active > a, .navbar-area .navbar .navbar-nav .nav-item:hover > a {
+        opacity: 1;
+        color: #fff; }
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+          .navbar-area .navbar .navbar-nav .nav-item.active > a, .navbar-area .navbar .navbar-nav .nav-item:hover > a {
+            color: #121212; } }
+        @media (max-width: 767px) {
+          .navbar-area .navbar .navbar-nav .nav-item.active > a, .navbar-area .navbar .navbar-nav .nav-item:hover > a {
+            color: #121212; } }
+        .navbar-area .navbar .navbar-nav .nav-item.active > a::before, .navbar-area .navbar .navbar-nav .nav-item:hover > a::before {
+          -webkit-transform: translate(-50%) scaleX(1);
+          -moz-transform: translate(-50%) scaleX(1);
+          -ms-transform: translate(-50%) scaleX(1);
+          -o-transform: translate(-50%) scaleX(1);
+          transform: translate(-50%) scaleX(1); }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+      .navbar-area .navbar .navbar-btn {
+        position: absolute;
+        right: 70px;
+        top: 7px; } }
+    @media (max-width: 767px) {
+      .navbar-area .navbar .navbar-btn {
+        position: absolute;
+        right: 60px;
+        top: 7px; } }
+    .navbar-area .navbar .navbar-btn li {
+      display: inline-block;
+      margin-right: 5px; }
+      .navbar-area .navbar .navbar-btn li a {
+        padding: 10px 16px;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #fff;
+        border: 2px solid;
+        border-radius: 4px;
+        -webkit-transition: all 0.3s ease-out 0s;
+        -moz-transition: all 0.3s ease-out 0s;
+        -ms-transition: all 0.3s ease-out 0s;
+        -o-transition: all 0.3s ease-out 0s;
+        transition: all 0.3s ease-out 0s; }
+        .navbar-area .navbar .navbar-btn li a.light {
+          border-color: #fff; }
+          .navbar-area .navbar .navbar-btn li a.light:hover {
+            background-color: rgba(255, 255, 255, 0.4); }
+        .navbar-area .navbar .navbar-btn li a.solid {
+          background-color: #fff;
+          border-color: #fff;
+          color: #0067f4; }
+          .navbar-area .navbar .navbar-btn li a.solid:hover {
+            background-color: transparent;
+            color: #fff; }
+  .navbar-area.sticky {
+    background-color: #fff;
+    z-index: 999;
+    position: fixed;
+    -webkit-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
+    -moz-box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05);
+    box-shadow: 0px 10px 25px 0px rgba(18, 18, 18, 0.05); }
+    .navbar-area.sticky .navbar .navbar-toggler .toggler-icon {
+      background-color: #121212; }
+    .navbar-area.sticky .navbar .navbar-nav .nav-item a {
+      color: #121212;
+      opacity: 0.7; }
+      .navbar-area.sticky .navbar .navbar-nav .nav-item a::before {
+        background: -webkit-linear-gradient(left, rgba(18, 18, 18, 0) 0%, #121212 100%);
+        background: -o-linear-gradient(left, rgba(18, 18, 18, 0) 0%, #121212 100%);
+        background: linear-gradient(to right, rgba(18, 18, 18, 0) 0%, #121212 100%); }
+    .navbar-area.sticky .navbar .navbar-nav .nav-item.active, .navbar-area.sticky .navbar .navbar-nav .nav-item:hover {
+      color: #121212;
+      opacity: 1; }
+    .navbar-area.sticky .navbar .navbar-btn li a.light {
+      border-color: #0067f4;
+      color: #0067f4; }
+    .navbar-area.sticky .navbar .navbar-btn li a.solid {
+      border-color: #0067f4;
+      background-color: #0067f4;
+      color: #fff; }
 
 
 

@@ -1,269 +1,312 @@
-<div class="progress my-3">
-  <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">Personal-Info</div>
-</div>
-<br>
-<div class="blue steps">
-  <div class="p-3 bg-white shadow-lg rounded-sm">
-              
-              
-              
-                <div>
-                    
-                    <br>
-                    <h5 class="heading-H">Income From House Property</h5>
-                    <hr class="separator--line" />
-                    <br>
-                    <p class="heading-info">In case you paid Interest on Housing Loan for house property you live in (self-occupied property) or If you own a house and are earning rent on it then specify the details here.</p>  
-                    <br>
-                    <p class="heading-info"><strong>Note:</strong> If you are paying rent to someone else, you <strong>should not</strong> enter the amount in this section.</p>
-                    <div class="py-5"><button class="btn btn-primary btn-lg btn-block " type="button" id="show-button-4-1">Click To Add House Property Details</button> 
-                    </div>
-                  </div>
+<section class="inner-section-step">
+  <div class="progress my-3">
+    <div class="progress-done progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Personal-Info</div>
+  </div>
+  <br>
+
+  <div class="blue steps step-shadow-box step-shadow-box-1">
+    <div class="p-3 bg-white shadow-lg rounded-sm">
+      <div>      
+            <br>
+            <h5 class="heading-H">Income From House Property</h5>
+            <hr class="separator--line" />
+            <br>
+            <p class="heading-description">In case you paid Interest on Housing Loan for house property you live in (self-occupied property) or If you own a house and are earning rent on it then specify the details here.</p>  
+            <br>
+            <p class="heading-info"><strong>Note:</strong> If you are paying rent to someone else, you <strong>should not</strong> enter the amount in this section.</p>               
+            <div class="py-5"><button class="btn btn-primary btn-lg btn-block " type="button" id="show-button-4-1">Click To Add House Property Details</button> 
+            </div>
+      </div>
                   
                     
                 
              
              
              
-                <div id="show-4-1" style="display: none;">
-                       <div>
-                            <h6 class="heading-content">House Property Details</h6>
-                          <div class="form-row justify-content-around">
-                           
-                            <div class="form-group col-md-4 heading-label">
-                              <p>Type of House Property:</p> 
-                            </div>  
-                            <div class="col-md-3 ">
+                <div id="show-4-1 hide">
+
+                  <div class="card">
+                        <div class="card-body">
+                          <h6 class="heading-content">House Property Details</h6>
+                          
+                          <div class="gap">
+                          <div class="row justify-content-between">
+                            <div class="form-group col-md-4">
+                              <h5 class="heading-label">Type of House Property:</h5>
+                            </div>
+                            <div class="form-group col-md-4">
                               <select class="form-control div-toggle" data-target=".my-info-1">
                                 <option data-show="" value="Self_Occupied_House_Property">Self-Occupied House Property</option>
                                 <option data-show=".option-2" value="Rental_Property">Rental Property</option>
                                 <option data-show=".option-3" value="Deemed_let_out_Property">Deemed-let-out Property</option>
                               </select>
                             </div>
-                            <p class="heading-description">30% Deduction under section 24 is automatically provided for by our software in Tax Calculation. </p>
+                          </div>
+                          <p class="heading-description-1">30% Deduction under section 24 is automatically provided for by our software in Tax Calculation. </p>
+                        </div>
+                      </div>
+                  </div>
                           
-                          </div>
-                        </div>  
+
+
+<br>
+
+
+
+  
       
-                <div class="my-info-1">        
-                  <div class="option-2 hide" >
+                <div class="my-info-1 "> 
+                  
+                  <div class="card option-2 hide">
+                    <div class="card-body">
                       <h6 class="heading-content">Income Earned from the House Property</h6>
-                      <div class="form-row justify-content-around">
-                           
-                        <div class="form-group col-md-4 heading-label">
-                          <p>Annual Rent Received by you:</p> 
-                        </div>  
-                        <div class="col-md-3 ">
-                          <input type="text" class="form-control" id="employee" required> 
-                        </div>
-                        <p class="heading-description">Please specify the portion of the rent received by you if the property is co-owned.</p>
                       
-                      </div>
-                        
-                      <div class="form-row justify-content-around">
-                           
-                        <div class="form-group col-md-4 heading-label">
-                          <p>House Tax paid by you:</p> 
-                        </div>  
-                        <div class="col-md-3 ">
-                          <input type="text" class="form-control" id="employee" required> 
-                        </div>
-                        <p class="heading-description">Please specify the portion of the rent received by you if the property is co-owned.</p>
                       
+                      <div class="gap">
+                      <div class="row justify-content-between">
+                        <div class="form-group col-md-4">
+                          <h5 class="heading-label">Annual Rent Received by you:</h5>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <input type="text" class="form-control"  required>
+                        </div>
                       </div>
-                              
-                        <br>
-                        <h6 class="heading-content">Tenant Details :</h6>
-                     
-                        
-                        <div class="form-row">
+                      <p class="heading-description-1">Please specify the portion of the rent received by you if the property is co-owned.</p>
+                      </div>
+               
+                      <div class="gap">
+                        <div class="row justify-content-between">
                           <div class="form-group col-md-4">
-                            <label for="tenant"><strong>Name of the Tenant*</strong> </label>
-                            <p style="visibility: hidden;">1</p>
-                            <input type="text" class="form-control" id="state" required>
+                            <h5 class="heading-label">House Tax paid by you:</h5>
                           </div>
                           <div class="form-group col-md-4">
-                            <label for="country"><strong>PAN/TAN of the Tenant</strong></label>
-                            </label>
-                            <p class="heading-description">Mandatory if TDS credit is claimed.</p>
-                            <input type="text" class="form-control" id="country" required>
+                            <input type="text" class="form-control"  required>
                           </div>
                         </div>
+                        <p class="heading-description-1">Please specify the portion of the rent received by you if the property is co-owned.</p>
+                        </div>
                         
-                        <button type="button" class="btn btn-primary">Add a Tenant</button>                  
-          
-                  </div>
-                        
-                  <div class="option-3 hide" >
-                    <h4>Estimated Income from the House Property</h4>
-                    <div class="form-row">
-                      <div class="form-group col-md-4">
-                        <label for="tenant"><strong>Estimated Annual Rent Receivable </strong> </label>
-                        <p class="heading-description">Please specify the sum for which the property might reasonably be expected to let from year to year. </p>
-                        <input type="text" class="form-control" id="state" required>
+                        <h5 class="heading-label">Tenant Details :</h5>
+
+                        <div class="gap">
+                          <div class="row justify-content-between">
+                            <div class="form-group col-md-4">
+                              <h5 class="heading-label">Name of the Tenant*</h5>
+                            </div>
+                            <div class="form-group col-md-4">
+                              <input type="text" class="form-control"  required>
+                            </div>
+                          </div>
+<br>
+                          <div class="row justify-content-between">
+                            <div class="form-group col-md-4">
+                              <h5 class="heading-label">PAN/TAN of the Tenant</h5>
+                            </div>
+                            <div class="form-group col-md-4">
+                              <input type="text" class="form-control"  required>
+                            </div>
+                          </div>
+                          <p class="heading-description-1">Mandatory if TDS credit is claimed.</p>
+                          </div>
+                          
+                          <button type="button" class="btn btn-primary">Add a Tenant</button>                  
+                        </div>
                       </div>
-                    </div>
-                    <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="country"><strong>House Tax paid by you </strong></label>
-                </label>
-                <p class="heading-description">Specifying House Tax you paid reduces your tax liability. </p>
-                <input type="text" class="form-control" id="country" required>
-              </div>
-                    </div> 
-                  </div>
-                </div>
+
+
+
+                            <div class="card option-3 hide">
+                              <div class="card-body">
+                                <h6 class="heading-content">Estimated Income from the House Property</h6>
+                                <div class="gap">
+                                  <div class="row justify-content-between">
+                                    <div class="form-group col-md-4">
+                                      <h5 class="heading-label">Estimated Annual Rent Receivable</h5>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                      <input type="text" class="form-control"  required>
+                                    </div>
+                                  </div>
+                                  <p class="heading-description-1">Please specify the sum for which the property might reasonably be expected to let from year to year.</p>
+                                  </div>
+                          
+                                  <div class="gap">
+                                    <div class="row justify-content-between">
+                                      <div class="form-group col-md-4">
+                                        <h5 class="heading-label">House Tax paid by you</h5>
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                        <input type="text" class="form-control"  required>
+                                      </div>
+                                    </div>
+                                    <p class="heading-description-1">Specifying House Tax you paid reduces your tax liability. </p>
+                                    </div>
+                      
+                                
+                              </div>
+                            </div>
+
+ </div>
                         
 
                           
        
                         
                         <div>
-                              <h6 class="heading-content">Interest paid on housing loan for this house property</h6>
-                                    <div class="form-row justify-content-around">
-                                      <p class="heading-description">If you have a housing loan against a house you live in then you can claim a tax deduction of upto Rs. 2,00,000 </p> 
-                                  
-                                      <div class="form-group col-md-4 heading-label">
-                                        <p>Interest paid on loan for this house property :</p> 
-                                      </div>  
-                                      <div class="col-md-3 "><input type="text" class="form-control " style="display: inline-block;" id="employee" required>
+                              <div class="card">
+                                    <div class="card-body">
+                                      <h6 class="heading-content">Interest paid on housing loan for this house property</h6>
+                                      <p class="heading-description">If you have a housing loan against a house you live in then you can claim a tax deduction of upto Rs. 2,00,000 </p>
+                                      <div class="gap">
+                                      <div class="row justify-content-between">
+                                        <div class="form-group col-md-4">
+                                          <h5 class="heading-label">Interest paid on loan for this house property :</h5>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <input type="text" class="form-control "  id="employee" required>
+                                        </div>
                                       </div>
-                                   </div>
-                                  
-                          
-                           
-                                <h6 class="heading-content">Interest paid during the pre-construction period of house property</h6>
-                                      <div class="form-row justify-content-around">
-                                      <div class="form-group col-md-4 heading-label">
-                                          <p>The financial year previous to completion of construction:</p> 
-                                        </div>  
-                                        
-                                        <div class="col-md-3 ">
-                                          <select class="dropdown">
-                                            <option value="yr1">2018-19</option>
-                                            <option value="yr2">2017-18</option>
-                                            <option value="yr3">2016-17</option>
-                                            <option value="yr4">2015-16</option>
-                                            <option value="yr5">2014-15</option>
-                                          </select>  
-                                        </div> 
-                                        <p class="heading-description">For example: If construction completed on 17th July 2010, you need to specify 2009-10 </p>
                                     </div>
-                               
+                                  </div>
+                              </div>
 
-                                    <div class="form-row justify-content-around">
-                                      <div class="form-group col-md-4 heading-label">
-                                        <p>Total interest amount paid during the pre-construction period:</p> 
-                                      </div>  
-                                      <div class="col-md-3 "><input type="text" class="form-control " style="display: inline-block;" id="employee" required>
-                                       </div>
-                                       <p class="heading-description">Interest paid from date of borrowing till 31st March of previous financial year. </p>
-                                
+ <br>                         
+                                <div class="card">
+                                  <div class="card-body">
+                                    <h6 class="heading-content">Interest paid during the pre-construction period of house property</h6>
+                                    
+                                    <div class="gap">
+                                    <div class="row justify-content-between">
+                                      <div class="form-group col-md-4">
+                                        <h5 class="heading-label">The financial year previous to completion of construction:</h5>
                                       </div>
-                                     
-                                     
-
-
-                                     <h6 class="heading-content">Your House Address</h6>
-                                <div>
-                                <div class="form-row">
-                                  <div class="form-group col-md-4">
-                                    <label for="flat">Flat/Door/Block Number*</label>
-                                    <input type="text" class="form-control" id="flat" required>
+                                      <div class="form-group col-md-4">
+                                        <select class="dropdown">
+                                          <option value="yr1">2018-19</option>
+                                          <option value="yr2">2017-18</option>
+                                          <option value="yr3">2016-17</option>
+                                          <option value="yr4">2015-16</option>
+                                          <option value="yr5">2014-15</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <p class="heading-description-1">For example: If construction completed on 17th July 2010, you need to specify 2009-10 </p>
                                   </div>
-                                  <div class="form-group col-md-4">
-                                    <label for="premise">Premise Name(optional).
-                                    </label>
-                                    <input type="text" class="form-control" id="premise" required>
+                                
+                                  <div class="gap">
+                                    <div class="row justify-content-between">
+                                      <div class="form-group col-md-4">
+                                        <h5 class="heading-label">Total interest amount paid during the pre-construction period:</h5>
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                        <input type="text" class="form-control "  id="employee" required>
+                                      </div>
+                                    </div>
+                                    <p class="heading-description-1">Interest paid from date of borrowing till 31st March of previous financial year. </p>
                                   </div>
+                                
+                                
+                                
                                 </div>
-
-                                <div class="form-row">
-                                  <div class="form-group col-md-4">
-                                    <label for="street">Road / Street(optional).</label>
-                                    <input type="text" class="form-control" id="street" required>
-                                  </div>
-                                  <div class="form-group col-md-4">
-                                    <label for="pincode">Pincode
-                                    </label>
-                                    <input type="text" class="form-control" id="pincode" required>
-                                  </div>
                                 </div>
+<br>
+                                <div class="card">
+                                  <div class="card-body">
+                                  <h6 class="heading-content">Your House Address</h6>
+                                          <div>
+                                          <div class="form-row justify-content-around">
+                                            <div class="form-group col-md-4">
+                                              <label for="flat">Flat/Door/Block Number*</label>
+                                              <input type="text" class="form-control" id="flat" required>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                              <label for="premise">Premise Name(optional).
+                                              </label>
+                                              <input type="text" class="form-control" id="premise" required>
+                                            </div>
+                                          </div>
 
-                                <div class="form-row">
-                                  <div class="form-group col-md-4">
-                                    <label for="locality">Area / Locality *</label>
-                                    <input type="text" class="form-control" id="locality" required>
-                                  </div>
-                                  <div class="form-group col-md-4">
-                                    <label for="city">Town / City *
-                                    </label>
-                                    <input type="text" class="form-control" id="city" required>
-                                  </div>
-                                </div>
+                                          <div class="form-row justify-content-around">
+                                            <div class="form-group col-md-4">
+                                              <label for="street">Road / Street(optional).</label>
+                                              <input type="text" class="form-control" id="street" required>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                              <label for="pincode">Pincode
+                                              </label>
+                                              <input type="text" class="form-control" id="pincode" required>
+                                            </div>
+                                          </div>
 
-                                <div class="form-row">
-                                  <div class="form-group col-md-4">
-                                    <label for="state">State*</label>
-                                    <input type="text" class="form-control" id="state" required>
-                                  </div>
-                                  <div class="form-group col-md-4">
-                                    <label for="country">Country*
-                                    </label>
-                                    <input type="text" class="form-control" id="country" required>
-                                  </div>
-                                </div>
+                                          <div class="form-row justify-content-around">
+                                            <div class="form-group col-md-4">
+                                              <label for="locality">Area / Locality *</label>
+                                              <input type="text" class="form-control" id="locality" required>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                              <label for="city">Town / City *
+                                              </label>
+                                              <input type="text" class="form-control" id="city" required>
+                                            </div>
+                                          </div>
+
+                                          <div class="form-row justify-content-around">
+                                            <div class="form-group col-md-4">
+                                              <label for="state">State*</label>
+                                              <input type="text" class="form-control" id="state" required>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                              <label for="country">Country*
+                                              </label>
+                                              <input type="text" class="form-control" id="country" required>
+                                            </div>
+                                          </div>
+                                      </div>
                             </div>
-            
+                            </div>
                           
-                            <br>
-                            <br>
-                            <div>
-                            <h6 class="heading-content">Co-Owners Details</h6>
-                            <br>
-                            <p class="heading-description">In case this property is jointly owned, please specify co-owners</p>
-                            <div class="Co-Owner">
                             
-                             
-                            <div class="form-row">
-                              <div class="form-group col-md-3">
-                                <label for="inputAddress">Name of Co-Owner</label>
-                                <input type="text" class="form-control"  required>
+                            <br>
+                            <div class="card">
+                              <div class="card-body">
+                                <h6 class="heading-content">Co-Owners Details</h6>
+                                <p class="heading-description">In case this property is jointly owned, please specify co-owners </p>
+                                <div class="gap Co-Owner">
+                                <div class="row justify-content-around">
+                                  <div class="form-group col-md-3">
+                                    <label for="employee">Name of Co-Owner:</label>
+                                    <input type="text" class="form-control "  id="employee" required>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="employee">PAN of Co-Owner:</label> 
+                                    <input type="text" class="form-control "  id="employee" required>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="employee">% share of Co-Owner:</label>
+                                    <input type="text" class="form-control "  id="employee" required>
+                                   </div>
+                                </div>
+                                
+                                
+                                <div class="form-group col-md-3" >
+                                  <button class="btn btn-primary" id="addCoowner" type="button">Add a Co-Owner</button>  
+                                 </div>
                               </div>
-                              <div class="form-group col-md-3">
-                                <label for="inputAddress2">PAN of Co-Owner </label>
-                                <input type="text" class="form-control"  required>
-                              </div>
-                              <div class="form-group col-md-3">
-                                <label for="inputAddress2">% share of Co-Owner</label>
-                                <input type="text" class="form-control" required>
-                               </div>
-                              </div>
-                              
-                            
-                        
-                        
+                            </div>
                         </div>
-                          <div class="form-group col-md-3" >
-                            <button class="btn btn-primary" id="addCoowner" type="button">Add a Co-Owner</button>  
                             
-                            </div>
-                          </div> 
+                        
                           
                             
-                        </div> 
+             </div> 
                         
                             
-                        <br>
+                       
         
                         
         
-          
-                          
-                    </div>
-
-                    
-                    
-      
-           </div>
 </div>
+</div>
+</div>
+
+</section>
