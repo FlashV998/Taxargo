@@ -33,6 +33,17 @@ padding: 1rem 0;
   border-radius:1.5rem;
 }
 
+.centered {
+  padding-top: 200px;
+  text-align: center;
+}
+
+.secret-text {
+text-align: center;
+font-size: 2rem;
+color: #fff;
+background-color: #000;
+}
 
  
 .blue{
@@ -129,12 +140,51 @@ text-align: left;
 
 
  
- /* INTRO TABS */
+ /* EACH FORM DETAILS */
+
+ /* .inner-section-step{
+  margin-top: 8rem;
+ } */
 
  .inner-section-step{
-  margin-top: 8rem;
+    
+  /* width: 0;
+  height: 100%;
+  top: 0;
+  left: 0; */
+  z-index: -1;
+  opacity: 0;
+  display: none;
+  transition: all 0.4s ease-in-out;
  }
+ 
+ .inner-section-step.active{
+  margin-top: 8rem;
+  /* overflow: visible; */
+  /* width: 100%; */
+  z-index: 1;
+  opacity: 1;
+  transition: all 0.4s ease-in-out;
+  display: block;
+  
+ }
+ .hidden {
+  opacity: 0;
+  display: none;
+  pointer-events: none;
+  transition: all 0.4s ease-in-out;
+ }
+ 
+ .show {
+  opacity: 1;
+  display: block;
+  pointer-events: auto;
+  transition: all 0.4s ease-in-out;
+ }
+ 
 
+
+/* EACH FORM DETAILS */
 a.introTab{font-size: 14px;
       font-weight: 700;
       color:#790c5a;
@@ -462,28 +512,10 @@ a:hover{
 
 
    
-   .steps {
-    
-    width: 0;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.4s ease-in-out;
-   }
    
-   .steps.active {
-    overflow: visible;
-    width: 100%;
-    z-index: 1;
-    visibility: visible;
-    opacity: 1;
-    transition: all 0.4s ease-in-out;
-    
-   }
-   
+
+
+
    /* animation for input boxes */
    
    .form-control.invalid {
@@ -516,19 +548,6 @@ a:hover{
     }
    }
    
-   .hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: all 0.4s ease-in-out;
-   }
-   
-   .show {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: all 0.4s ease-in-out;
-   }
    
    /* @media screen and (min-width: 768px) {
     .fix-height {
