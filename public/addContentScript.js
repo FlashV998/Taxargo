@@ -1,6 +1,23 @@
 $(document).ready(function(){
     
-    
+    // SIGN-UP PAGE JS
+    $(function() {
+  
+        // contact form animations
+        $('#sign-up').click(function() {
+          $('#signForm').fadeToggle();
+        })
+        $(document).mouseup(function (e) {
+          var container = $("#signForm");
+      
+          if (!container.is(e.target) // if the target of the click isn't the container...
+              && container.has(e.target).length === 0) // ... nor a descendant of the container
+          {
+              container.fadeOut();
+          }
+        });
+        
+      });
 
     $("#addCoowner").click(function(){
     $(".Co-Owner").append('<div class="form-row"><div class="form-group col-md-3"><label for="inputAddress">Name of Co-Owner</label><input type="text" class="form-control"  required></div><div class="form-group col-md-3"><label for="inputAddress2">PAN of Co-Owner </label><input type="text" class="form-control"  required></div><div class="form-group col-md-3"><label for="inputAddress2">% share of Co-Owner</label><input type="text" class="form-control" required></div><a class="btn delete-owner col-md-1"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>')
@@ -45,6 +62,7 @@ const progress = document.querySelector('.progress-done');
 
 progress.style.width = progress.getAttribute('data-done') + '%';
 progress.style.opacity = 1;
+
 
 
 

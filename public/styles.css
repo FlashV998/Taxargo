@@ -6,13 +6,17 @@
   font-weight: normal;
   font-style: normal;
   color: #121212; 
-  background: #2980B9;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
+/*   
+  background: #2980B9;  
+  background: -webkit-linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); 
+  background: linear-gradient(to right, #FFFFFF, #6DD5FA, #2980B9); 
+   */
+   background: #007bff;
+   background: -webkit-linear-gradient(to right, #0062E6, #33AEFF);
+    background: linear-gradient(to right, #0062E6, #33AEFF);
 }
 
-
+/* 
   h1,
   h2,
   h3,
@@ -22,7 +26,7 @@
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     color: #000000;
-    margin: 0px; }
+    margin: 0px; } */
 
 
 .form-row{
@@ -237,6 +241,12 @@ a:hover{
 .step-shadow-box-1:hover{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+
+
+
+/*===========================
+        09.Register PAGE css 
+===========================*/
 
 
 /*===========================
