@@ -19,26 +19,23 @@
         
     
     
-    <!--====== Default CSS ======-->
-    <!-- <link rel="stylesheet" href="assets/css/default.css"> -->
-    
-    <!--====== Style CSS ======-->
-    <!-- <link rel="stylesheet" href="assets/css/style.css">  -->
-
-
-
-
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <script src="https://use.fontawesome.com/4301952e86.js"></script>
+
+    <!-- FILEPND STYLESHEET -->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+
 </head>
 <body>
  
   <section>
     <div class="container">
-    <form id="stepped" action="/Form-page" method="post">
+    <form id="stepped" action="/formpage" method="post">
         <div class="container">
           <!-- <div class="note">
             <p>ITR MADE SIMPLER,IN FEW STEPS IT WILL BE DONE</p>
@@ -70,37 +67,8 @@
                         <!-- <%- include("formdetails/step1.ejs"); -%> -->
                     <!-- page1 of form ends -->
                 
-                  
-                    <!-- page-2 of page starts -->
-                      <!-- <%- include("formdetails/step2.ejs"); -%> -->
-                    <!-- page-2 of page ends -->
-                  
-                    <!-- page3 of page starts -->
-                        <!-- <%- include("formdetails/step3.ejs"); -%> -->
-                    <!-- page -3 of page ends -->
-                  
-                    
-                    <!-- page-4 of page STARTS -->
-                        <!-- <%- include("formdetails/step4.ejs"); -%>  -->
-                    <!-- page-4 of page ENDS -->
-                  
-                    <!-- page-5 of page STARTS -->
-                        <!-- <%- include("formdetails/step5.ejs"); -%> -->
-                    <!-- page-5 of page  ENDS -->
-              
-              
-                    <!-- page-6 of page  STARTS -->
-                        <!-- <%- include("formdetails/step6.ejs"); -%> -->
-                    <!-- page-6 of page  ENDS -->   
-
-                    <!-- page-7 of page  STARTS -->
-                        <!-- <%- include("formdetails/step7.ejs"); -%> -->
-                    <!-- page-7 of page  ENDS -->   
-
-                    <!-- page-8 of page  STARTS -->
-                        <!-- <%- include("formdetails/step8.ejs"); -%> -->
-                    <!-- page-8 of page  ENDS -->
-              
+                    <%- include("formdetails/UserMain.ejs"); -%>
+                   
               
               </div>
               </div>
@@ -157,12 +125,23 @@
     <!--====== Scrolling Nav js ======-->
     <script src="assets/js/jquery.easing.min.js"></script>
     <script src="assets/js/scrolling-nav.js"></script>
-    
+ 
+        <!--====== FILEPOND js ======-->
+        <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-image-validate-size/dist/filepond-plugin-image-validate-size.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+
     <!--====== Main js ======-->
+    <script defer src="filePond.js"></script>
     <script src="script1.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="addContentScript.js"></script>
     
-
+    <script src="addContentScript.js"></script>
+ 
 </body>
 </html>

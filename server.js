@@ -9,14 +9,16 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
+const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif'];
 
 const app = express();
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '50mb',extended: true}));
+
+
 
 app.use(session({
   secret: process.env.SECRET,
@@ -36,11 +38,69 @@ const userLoginSchema = new mongoose.Schema ({
   googleId: String,
   
 });
+const userFileData=new mongoose.Schema({
+  file1: {
+    type: Buffer,
+    required: true
+  },
+  file1Type: {
+    type: String,
+    required: true
+  }
+    
+});
+
+const userPersonalData=new mongoose.Schema({
+  fname:{
+    type:String,
+    required:true
+  },
+  lname:{
+    type:String,
+      required:true
+  },
+  flatno:{
+    type:String,
+    required:true
+  },
+  premiseno:{
+    type:String
+  },
+  streetname:{
+    type:String,
+    required:true
+  },
+  pincode:{
+    type:Number,
+    required:true
+  },
+  localityname:{
+    type:String,
+    required:true
+  },
+  townname:{
+    type:String,
+    required:true
+  },
+  statename:{
+    type:String,
+    required:true
+  },
+  mobileno:{
+    type:String,
+    required:true
+  },
+  savefile1:[userFileData]
+  
+}); 
+
 
 userLoginSchema.plugin(passportLocalMongoose);
 userLoginSchema.plugin(findOrCreate);
 
 const User= new mongoose.model("User", userLoginSchema);
+const UserPersonal=new mongoose.model("UserPersonal",userPersonalData);
+const UserFile=new mongoose.model("UserFile",userFileData);
 
 passport.use(User.createStrategy());
 
@@ -61,6 +121,7 @@ passport.use(new GoogleStrategy({
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
@@ -121,7 +182,6 @@ app.post("/register", function(req, res){
   });
 
 });
-
 app.post("/login", function(req, res){
 
   const user = new User({
@@ -141,8 +201,54 @@ app.post("/login", function(req, res){
 
 });
 
+app.post("/formpage", async (req, res) => {
+  const file1 = new UserPersonal({
+    fname: req.body.firstName,
+    lname: req.body.lastName,
+    flatno: req.body.flatNo,
+    premiseno: req.body.premiseName,
+    streetname:req.body.roadName,
+    pincode:req.body.pincode,
+    localityname:req.body.locality,
+    townname:req.body.city,
+    statename:req.body.state,
+    mobileno:req.body.mobile
+    });
+  saveFiles1(file1, req.body.cover1)
+  saveFiles1(file1, req.body.cover2)
+  saveFiles1(file1, req.body.cover3)
+  saveFiles1(file1, req.body.cover4)
+  try {
+    const newBook = await file1.save();
+     console.log(file1);
+   res.redirect("/");
+  } catch {
+    res.redirect("/login");
+  }
+})
 
 
+function saveFiles1(file1, coverEncoded) {
+  if (coverEncoded == null) return
+  const cover = JSON.parse(coverEncoded)
+  if (cover != null && imageMimeTypes.includes(cover.type)) {
+      file1.savefile1.push({file1:new Buffer.from(cover.data, 'base64'),file1Type:cover.type});
+    }
+}
+
+// async function renderNewPage(res, book, hasError = false) {
+//   try {
+//     const authors = await Author.find({})
+//     const params = {
+//       authors: authors,
+//       book: book
+//     }
+//     if (hasError) params.errorMessage = 'Error Creating Book'
+//     res.render('books/new', params)
+//   } catch {
+//     res.redirect('/books')
+//   }
+// }
 
 
 
