@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Secrets</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="signStyle.css">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    var razorPublicKey = '<%= razorPublicKey %>'
+</script>
+<script src="razorPay.js" defer></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9 col-xl-8 mx-auto">
+        <div class="card card-signin flex-row my-5">
+          <div class="card-img-left d-none d-md-flex">
+          </div>
+          <div class="card-body">
+            <form action="/orders" method="POST"> 
+            <div class="gap row justify-content-around">
+
+                        <div class="form-group col-md-8">
+                            <label  for="category">Select Your Service</label>
+                            <select name="serviceSelected" id="category" class="form-control">
+                              <option value={<%=items.products[0].price %>}>File IncomeTax-Return</option>
+                              <option value={<%=items.products[1].price %>}>File GST</option>
+                              
+                            </select>
+                          </div>
+                          
+                  <button type="button" id="checkGetId">Select OPTION</button>
+                          </div> 
+                </form>
+                <button id="rzp-button1">Pay</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  
+</body>
+</html>

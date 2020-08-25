@@ -1,0 +1,14 @@
+{
+    "products":[
+        {
+            "id":1,
+            "name":"GST",
+            "price":4000
+         },
+        {    "id":2,
+            "name":"ITR",
+            "price":5000
+        }
+
+    ]
+}
