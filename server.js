@@ -17,13 +17,15 @@ let instance = new Razorpay({
   key_id: 'rzp_test_6Mo0ReH3m1D3F8', // your `KEY_ID`
   key_secret: '3yeb9Qj5AmUve2f0nbFQVqXR' // your `KEY_SECRET`
 })
-const cors = require('cors')
+const cors = require('cors');
+const { log } = require('console');
 
 const app = express();
 app.use(cors())
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
+app.use(express.json({limit:'1mb'}));
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '50mb',extended: true}));
 
@@ -163,52 +165,37 @@ app.get("/login", function(req, res){
 app.get("/register", function(req, res){
   res.render("register");
 });
-// val totalValue;
-// app.post("/totalservice",function(req,res){
-//    totalValue=req.body.serviceSelected;
-//    try {
-//     const options = {
-//       amount: req.body.serviceSelected * 100, // amount == Rs 10
-//       currency: "INR",
-//       receipt: "receipt#1",
-//       payment_capture: 1,
-//  // 1 for automatic capture // 0 for manual capture
-//     };
-//   instance.orders.create(options, async function (err, order) {
-//     if (err) {
-//       return res.status(500).json({
-//         message: "Something Went Wrong",
-//       });
-//     }
-//   return res.status(200).json(order);
-//  });
-// } catch (err) {
-//   return res.status(500).json({
-//     message: "Something Went Wrong",
-//   });
-//  }
 
+// app.get("/paymentpage",function(req,res){
+//   res.render("Payment");
 // })
+app.post("/orders",function(req,res){
+  const options=req.body;
+  try{
+  instance.orders.create(options, async function(err, order) {
+    if (err) {
+            return res.status(500).json({
+              message: "Something Went Wrong",
+            });
+          }
+        return res.status(200).send(order);
+       });
+    }
+  catch (err) {
+    return res.status(500).json({
+      message: "Something Went Wrong",
+    });
+    }
+        
+  
+})
 
-
-// app.post("/orders",function(req,res){
-//   console.log(req.body.serviceSelected);
-//   var options = {
-//     amount: req.body.serviceSelected,  // amount in the smallest currency unit
-//     currency: "INR",
-//     receipt: "order_rcptid_11",
-//     payment_capture: '0'
-//   };
-//   instance.orders.create(options, function(err, order) {
-//     // console.log(order);
-//   });
-// })
 app.get("/totalservice",function(req,res){
   fs.readFile('items.json', function(error, data) {
     if (error) {
       res.status(500).end()
     } else {
-      res.render("orders", {
+      res.render("Payment", {
         razorPublicKey: instance.key_id,
         items: JSON.parse(data)
       })
@@ -218,34 +205,8 @@ app.get("/totalservice",function(req,res){
 })
 
 
-app.get("/orders", (req, res) => {
-  try {
-    const options = {
-      amount: 100, // amount == Rs 10
-      currency: "INR",
-      receipt: "receipt#1",
-      payment_capture: 1,
- // 1 for automatic capture // 0 for manual capture
-    };
-  instance.orders.create(options, async function (err, order) {
-    if (err) {
-      return res.status(500).json({
-        message: "Something Went Wrong",
-      });
-    }
-  return res.status(200).send(order);
- });
-} catch (err) {
-  return res.status(500).json({
-    message: "Something Went Wrong",
-  });
- }
-});
-
 app.post("/verify",(req,res)=>{
-  console.log(req.body.razorpay_payment_id);
-  // console.log(data.razorpay_payment_id);
-  console.log(req.body.razorpay_signature);
+
 })
 
 app.get("/formpage",function(req,res){
