@@ -32,70 +32,20 @@
 
 </head>
 <body>
- 
+  <%- include("formdetails/partsComponent/navbar1") -%>
+            
   <section>
     <div class="container">
     <form id="stepped" action="/formpage" method="post">
-        <div class="container">
-          <!-- <div class="note">
-            <p>ITR MADE SIMPLER,IN FEW STEPS IT WILL BE DONE</p>
-        </div> -->
           <div class="row justify-content-center">
-            <%- include("formdetails/partsComponent/navbar1") -%>
-                <!-- <div class="col-md-10">
-                  <ul class="list-group list-group-horizontal-sm justify-content-around py-3">
-                    <a type="button" class="btn introTab rounded  mr-3 list-group-item option1">1.PERSONAL-INFO</a>
-                    <a type="button" class="btn introTab rounded  mr-3 list-group-item option2">2.INCOME SOURCES</a>
-                    <a type="button" class="btn introTab rounded  mr-3 list-group-item option3">3.TAXES PAID</a>
-                    <a type="button" class="btn introTab rounded  mr-3 list-group-item option4">4.DEDUCTION</a>
-                    <a type="button" class="btn introTab rounded  mr-3 list-group-item option5">5.TAX-FILING</a>
-                  </ul>
-                </div> -->
-                
-                <!-- <div class="col-md-10">
-                <div class="indicators d-flex justify-content-around py-4 text-light">
-                  <div class="rounded-circle bg-secondary bg-success px-2 shadow-sm mr-2">1</div>
-                  <div class="rounded-circle bg-secondary px-2 shadow-sm mr-2">2</div>
-                  <div class="rounded-circle bg-secondary px-2 shadow-sm mr-2">3</div>
-                  <div class="rounded-circle bg-secondary px-2 shadow-sm">4</div>
+                <div class="col-md-10 position-relative">
+                   <%- include("formdetails/UserMain.ejs"); -%>
                 </div>
-                </div> -->
-              
-                <div class="col-md-10">
-                <div class="position-relative">
-                    <!-- page-1 of form -->
-                        <!-- <%- include("formdetails/step1.ejs"); -%> -->
-                    <!-- page1 of form ends -->
-                
-                    <%- include("formdetails/UserMain.ejs"); -%>
-                   
-              
-              </div>
-              </div>
           </div>
-         
-                 <!-- ROW DIV-->
-                  <!-- BUTTONS -->
-                  <div class="my-3">
-                    <div class="row justify-content-around">
-                      <div class="col-md-3">
-                        <button type="button" class="btnPrev btn btn-block btn-outline-success">Prev</button>
-                      </div>
-                      <div class="col-md-3">
-                        <button type="submit" class="btnNext btn btn-block btn-outline-success">Next</button>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- BUTTONS -->
-
-                </div>
-      </div> <!--CONTAINER DIV -->
-         
-    </form>   
-  </div>
-    </section>
-
-    <%- include("footer"); -%>
+    </form>        
+    </div>
+   </section>
+  <%- include("footer"); -%>
 
 
     <!--====== Jquery js ======-->

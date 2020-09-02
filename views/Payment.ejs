@@ -52,16 +52,16 @@
                               <div class="card-body">
                                   <div class="gap row justify-content-between">
                                         <div class="card text-white bg-success mb-3 col-md-6" style="max-width: 20rem;">
-                                            <div class="card-header text-center">GST</div>
+                                            <div class="card-header text-center">ITR</div>
                                             <div class="card-body">
-                                            <h4 class="card-title">Success card title</h4>
+                                            <h4 id="priceElement1" class="card-title"><%= items.products[0].price %></h4>
                                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                             </div>
                                         </div>
                                         <div class="card text-white bg-success mb-3 col-md-6" style="max-width: 20rem;">
-                                            <div class="card-header text-center">ITR</div>
+                                            <div class="card-header text-center">GST</div>
                                             <div class="card-body">
-                                            <h4 class="card-title">Success card title</h4>
+                                            <h4 id="priceElement2" class="card-title"><%= items.products[1].price %></h4>
                                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                         </div>
                                         </div>
@@ -70,8 +70,8 @@
                                                 <div class="form-group col-md-8">
                                                     <label  for="category">Select Your Service</label>
                                                     <select name="E_category" id="selectedService" class="form-control">
-                                                      <option value={<%=items.products[0].price %>}>File IT-Return</option>
-                                                      <option value={<%=items.products[1].price %>}>File GST</option>
+                                                      <option value="ITR">File IT-Return</option>
+                                                      <option value="GST">File GST</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-3 my-4 ">

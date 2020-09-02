@@ -20,26 +20,16 @@
           </div>
           <div class="card-body">
             <h5 class="card-title text-center">Add Account</h5>
-            <form class="form-signin" action="/register" method="POST" >
+            <form class="form-signin" action="/forgot" method="POST" >
 
               <div class="form-label-group">
-                <input name="username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+                <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
                 <label for="inputEmail">Email address</label>
               </div>
               
-              
 
-              <div class="form-label-group">
-                <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
-              </div>
-              
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
-              <a class="d-block text-center mt-2 small" href="#">Log In</a>
-              <a class="d-block text-center mt-2 small" href="/forgotpassword">Forgot Password</a>
-              <hr class="my-4">
-              <a class="btn btn-lg btn-google btn-block text-uppercase" href="/auth/google" role="button"><i class="fab fa-google mr-2"></i> Sign up with Google</a>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Get Reset Link</button>
               
             </form>
           </div>

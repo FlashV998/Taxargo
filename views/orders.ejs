@@ -31,8 +31,8 @@
                         <div class="form-group col-md-8">
                             <label  for="category">Select Your Service</label>
                             <select name="serviceSelected" id="category" class="form-control">
-                              <option value={<%=items.products[0].price %>}>File IncomeTax-Return</option>
-                              <option value={<%=items.products[1].price %>}>File GST</option>
+                              <option value="ITR" data-price={ <%= items.products[0].price %> }>File IncomeTax-Return</option>
+                              <option value="GST" data-price={ <%= items.products[1].price %> }>File GST</option>
                               
                             </select>
                           </div>

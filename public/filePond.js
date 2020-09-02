@@ -12,7 +12,19 @@ FilePond.setOptions({
     labelFileTypeNotAllowed:'File of invalid type'
 });
 
-FilePond.create(document.querySelector('.Aadhar'), {
+FilePond.create(document.getElementById("file1"), {
+    acceptedFileTypes: ['image/jpeg', 'image/png', 'images/gif'],
+    maxFileSize:"1MB"  
+});
+FilePond.create(document.getElementById("file2"), {
+    acceptedFileTypes: ['image/jpeg', 'image/png', 'images/gif'],
+    maxFileSize:"1MB"  
+});
+FilePond.create(document.getElementById("file3"), {
+    acceptedFileTypes: ['image/jpeg', 'image/png', 'images/gif'],
+    maxFileSize:"1MB"  
+});
+FilePond.create(document.getElementById("file4"), {
     acceptedFileTypes: ['image/jpeg', 'image/png', 'images/gif'],
     maxFileSize:"1MB"  
 });
