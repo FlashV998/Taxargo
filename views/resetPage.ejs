@@ -3,10 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Secrets</title>
+  <title>Secretss</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="signStyle.css">
+
 </head>
 
 <body>
@@ -19,27 +20,20 @@
              <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body">
-            <h5 class="card-title text-center">Add Account</h5>
-            <form class="form-signin" action="/register" method="POST" >
+            <h5 class="card-title text-center" name="resetId" >Change Password</h5>
+            <form class="form-signin" action="/reset/<%= customResetId %>" method="POST" >
 
               <div class="form-label-group">
-                <input name="username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-                <label for="inputEmail">Email address</label>
+                <input name="resetpassword" type="text" id="resetpassword" class="form-control" placeholder="Enter Password" required>
+                
               </div>
-              
-              
-
               <div class="form-label-group">
-                <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
+                <input name="confirmresetpassword" type="text" id="coonfirmresetpassword" class="form-control" placeholder="Enter Password" required>
+                
               </div>
-              
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
-              <a class="d-block text-center mt-2 small" href="/login">Log In</a>
-              <a class="d-block text-center mt-2 small" href="/forgotpassword">Forgot Password</a>
-              <hr class="my-4">
-              <a class="btn btn-lg btn-google btn-block text-uppercase" href="/auth/google" role="button"><i class="fab fa-google mr-2"></i> Sign up with Google</a>
+
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Change Password</button>
               
             </form>
           </div>

@@ -36,12 +36,18 @@
             
   <section>
     <div class="container">
-    <form id="stepped" action="/formpage" method="post">
+    <form id="stepped" action="/formpage<%= customVID %>" method="post">
           <div class="row justify-content-center">
                 <div class="col-md-10 position-relative">
                    <%- include("formdetails/UserMain.ejs"); -%>
                 </div>
           </div>
+          <div  class="row justify-content-center ">
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-block" type="submit">SUBMIT</button>
+            </div>
+            
+        </div>
     </form>        
     </div>
    </section>
@@ -89,9 +95,9 @@
     <!--====== Main js ======-->
     <script defer src="filePond.js"></script>
     <script src="script1.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- <script src="assets/js/main.js"></script> -->
     
-    <script src="addContentScript.js"></script>
+    <!-- <script src="addContentScript.js"></script> -->
  
 </body>
 </html>

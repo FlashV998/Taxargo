@@ -14,6 +14,7 @@ const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif'];
 const fs=require("fs");
 const Razorpay=require('razorpay');
 const sendResetLink = require("./resetPasswordMail");
+const flash = require('connect-flash');
 let instance = new Razorpay({
   key_id: 'rzp_test_6Mo0ReH3m1D3F8', // your `KEY_ID`
   key_secret: '3yeb9Qj5AmUve2f0nbFQVqXR' // your `KEY_SECRET`
@@ -31,7 +32,6 @@ app.use(bodyParser.json({limit: '50mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '50mb',extended: true}));
 
 
-
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
@@ -40,29 +40,31 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 mongoose.connect("mongodb://localhost:27017/rtiUserdb", {useNewUrlParser: true,useUnifiedTopology: true});
 mongoose.set("useCreateIndex", true);
+mongoose.set('useFindAndModify', false);
 
-const userLoginSchema = new mongoose.Schema ({
-  username: String,
-  password: String,
-  googleId: String,
-  
-});
+
+
+
 const userFileData=new mongoose.Schema({
   file1: {
     type: Buffer,
-    required: true
+    // required: true
   },
   file1Type: {
     type: String,
-    required: true
+    // required: true
   }
     
 });
 
 const userPersonalData=new mongoose.Schema({
+  order_id:{
+    type:String
+  },
   fname:{
     type:String,
     required:true
@@ -106,14 +108,31 @@ const userPersonalData=new mongoose.Schema({
   
 }); 
 
+const userLoginSchema = new mongoose.Schema ({
+  username: String,
+  password: String,
+  googleId: String,
+  payment:{
+    orderSelected:String,
+    },
+    orders:[{
+      _id:false,
+      product_name:String,
+      razorpay_payment_id:String,
+      razorpay_order_id:String,
+      razorpay_signature:String
+      }],
+  userPersonalData:[userPersonalData]
+  });
 
 userLoginSchema.plugin(passportLocalMongoose);
 userLoginSchema.plugin(findOrCreate);
 
-const User= new mongoose.model("User", userLoginSchema);
-const UserPersonal=new mongoose.model("UserPersonal",userPersonalData);
 const UserFile=new mongoose.model("UserFile",userFileData);
+const UserPersonal=new mongoose.model("UserPersonal",userPersonalData);
+const User= new mongoose.model("User", userLoginSchema);
 
+//PASSPORT STARTEGY FILES
 passport.use(User.createStrategy());
 
 passport.serializeUser(function(user, done) {
@@ -141,66 +160,221 @@ passport.use(new GoogleStrategy({
     });
   }
 ));
+//PASSPORT STARTEGY FILES
+
 
 app.get("/",function(req,res){
-
   res.render("index");
   });
-  
 
 app.get("/auth/google",
   passport.authenticate('google', { scope: ["profile","email"] })
 );
 
-app.get("/auth/google/formpage",
+app.get("/auth/google/totalservice",
   passport.authenticate('google', { failureRedirect: "/login" }),
   function(req, res) {
     // Successful authentication, redirect to secrets.
-    res.redirect("/formpage");
+    res.redirect("/totalservice");
+  });
+
+  app.get("/register", function(req, res){
+    res.render("register");
   });
 
 app.get("/login", function(req, res){
   res.render("login");
+  // const valu=req.flash("message")[0];
+// console.log(valu);  
 });
 
-app.get("/register", function(req, res){
-  res.render("register");
-});
 
-// app.get("/paymentpage",function(req,res){
-//   res.render("Payment");
-// })
-
-app.get("/totalservice",function(req,res){
-  fs.readFile('items.json', function(error, data) {
-    if (error) {
-      res.status(500).end()
-    } else {
-      res.render("Payment", {
-        razorPublicKey: instance.key_id,
-        items: JSON.parse(data)
-      })
-    
-    }
-  })  
+app.get("/totalservice:customVID",function(req,res){
+  if(req.isAuthenticated()){
+        fs.readFile('items.json', function(error, data) {
+            if (error) {
+              res.status(500).end()
+              } 
+            else {
+              res.render("Payment", {
+              razorPublicKey: instance.key_id,
+              items: JSON.parse(data),
+              customVID:req.params.customVID
+                });
+              }
+          })  
+        } 
+   else{
+    res.redirect("/login");
+  }    
 })
 
-app.get("/formpage",function(req,res){
-  // if(req.isAuthenticated()){
-    
-  //   }
-  // else{
-  //   res.redirect("/login");
-  // }
-  res.render("formpage");
+app.get("/formpage:customVID",function(req,res){
+  if(req.isAuthenticated()){
+  res.render("formpage",{customVID:req.params.customVID});  
+    }
+  else{
+    res.redirect("/login");
+  }
+  
   });
 
   app.get("/forgotpassword",function(req,res){
   res.render("forgotpage");
   });
 
+
+  app.get("/reset:customResetId",function(req,res){
+    const customResetId=req.params.customResetId;
+    
+  // console.log(data);
+    User.findOne({_id:customResetId},function(err,data){
+      if(err){
+        console.log(err);
+      }
+      else{
+        // console.log(data._id);
+        res.render("resetPage",{customResetId:customResetId});
+      }
+    });
+  })
+
+  app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/");
+  });
+  
+
+  //POST REQUESTS
+  app.post("/register", function(req, res){
+     
+    User.register({username:req.body.username}, req.body.password, function(err, user){
+      if (err) {
+        
+        console.log(err.message);
+        res.redirect("/register");
+      } 
+      else {
+            res.redirect("/login");
+        }});
+         
+  });
+
+
+  app.post("/login", function(req, res){
+  
+    const user = new User({
+      username: req.body.username,
+      password: req.body.password
+    });
+ 
+    req.login(user, function(err){
+      if (err) {
+        console.log(err);
+      } 
+      else {
+        passport.authenticate("local",{failureRedirect:"/login",failureFlash:true})(req, res, function(){
+          User.findOne({username: req.body.username},(err,data)=>{
+            if(err){console.log(err);}
+            else{ res.redirect("/totalservice"+data._id);}
+           
+          })
+          
+        });
+      }
+    });
+  
+  });
+//   app.post("/login", passport.authenticate("local"), function(req, res){
+        
+//   User.findOne({username: req.body.username},(err,data)=>{
+//               if(err){console.log(err);}
+//               else{ res.redirect("/totalservice"+data._id);}
+// });
+// })
+// app.post('/login', function(req, res, next) {
+//   const user = new User({
+//         username: req.body.username,
+//         password: req.body.password
+//       });
+
+//   passport.authenticate('local',{failureRedirect:"/login",failureFlash:true}, function(err, user, info) {
+//     if (err) {
+//       return next(err); // will generate a 500 error
+//     }
+//     // Generate a JSON response reflecting authentication status
+//     if (! user) {
+//       req.flash({message : 'authentication failed'})
+//       //  res.status(401).send({ success : false, message : 'authentication failed' });
+//     }
+//     req.login(user, function(err){
+//       if(err){
+//         return next(err);
+//       }
+//       else{
+//         User.findOne({username: req.body.username},(err,data)=>{
+//           if(err){console.log(err);}
+//           else{ 
+//             // res.send({ success : true, message : 'authentication succeeded' });
+//             res.redirect("/totalservice"+data._id);}
+//             });
+//          }
+              
+//     });
+//   })(req, res, next);
+// });  
+
+  
+  app.post("/forgot", (req, res) => {
+    const UserEmail = req.body.email;
+    
+    User.findOne({username:UserEmail},(err,data)=>{
+      if(err){
+        console.log(err);
+      }
+      else if(data === null){
+      console.log("User not found");
+      }
+      else {
+        sendResetLink(data.username,data._id);
+      }
+  
+      res.redirect("/register");
+    });  
+  });
+  
+  app.post("/reset/:customResetId", (req, res) => {
+    console.log(req.params.customResetId);
+    User.findOne({_id:req.params.customResetId}, function(err,returneduser){
+      if(!User){
+          console.log("No user exists");
+      }
+      if (req.body.resetpassword === req.body.confirmresetpassword){
+            returneduser.setPassword(req.body.resetpassword, function(err) {
+                returneduser.save(function(err){
+                    console.log(err);
+                    res.redirect("/register");
+                });
+            });
+            // console.log(returneduser);
+      } else {
+         console.log("Passwords do not match")       ;
+         res.redirect("/register");
+      }
+  });
+  });
+  
+//FOR RAZOR PAYMENT PASSING ORDER ID AND TAKING PAYMENTS
 app.post("/orders",function(req,res){
-  const options=req.body;
+  const options={
+    amount:req.body.amount,
+    currency:req.body.currency,
+    receipt:req.body.receipt,
+    payment_capture:req.body.payment_capture,
+  }
+  customVID=req.body.customVID;
+  console.log(customVID);
+
   try{
   instance.orders.create(options, async function(err, orderID) {
     if (err) {
@@ -208,7 +382,14 @@ app.post("/orders",function(req,res){
               message: "Something Went Wrong",
             });
           }
-        return res.status(200).send(orderID);
+     else{   
+       console.log(orderID);
+      User.findOneAndUpdate({_id: customVID},{payment:{orderSelected:orderID.id}},(err)=>{
+           if(err){console.log(err);}
+          })
+          return res.status(200).send(orderID);
+      }     
+        
        });
     }
   catch (err) {
@@ -216,124 +397,71 @@ app.post("/orders",function(req,res){
       message: "Something Went Wrong",
     });
     }
-        
-  
 })
 
 
-app.post("/verify",(req,res)=>{
-
-})
-
-app.post("/formpage", async (req, res) => {
-  const file1 = new UserPersonal({
-    fname: req.body.firstName,
-    lname: req.body.lastName,
-    flatno: req.body.flatNo,
-    premiseno: req.body.premiseName,
-    streetname:req.body.roadName,
-    pincode:req.body.pincode,
-    localityname:req.body.locality,
-    townname:req.body.city,
-    statename:req.body.state,
-    mobileno:req.body.mobile
-    });
-  saveFiles1(file1, req.body.cover1)
-  saveFiles1(file1, req.body.cover2)
-  saveFiles1(file1, req.body.cover3)
-  saveFiles1(file1, req.body.cover4)
-  try {
-    const newBook = await file1.save();
-     console.log(file1);
-   res.redirect("/");
-  } catch {
-    res.redirect("/login");
-  }
-})
-
-
-app.get("/logout", function(req, res){
-  req.logout();
-  res.redirect("/");
-});
-
-app.post("/register", function(req, res){
-
-  User.register({username:req.body.username}, req.body.password, function(err, user){
-    if (err) {
-      console.log(err);
-      res.redirect("/register");
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/formpage");
-      });
-    }
-  });
-
-});
-app.post("/login", function(req, res){
-
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password
-  });
-
-  req.login(user, function(err){
-    if (err) {
-      console.log(err);
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/formpage");
-      });
-    }
-  });
-
-});
-
-app.post("/forgot", (req, res) => {
-  const UserEmail = req.body.email;
-  
-  User.findOne({username:UserEmail},(err,data)=>{
+app.post("/verify:customVID",(req,res)=>{
+console.log(req.body);
+  User.findOne({_id:req.params.customVID},(err,returnedUser)=>{
     if(err){
       console.log(err);
     }
-    else if(data === null){
-    console.log("User not found");
+    else{
+        returnedUser.orders.push({ 
+        product_name:req.body.product_name,  
+        razorpay_payment_id:req.body.razorpay_payment_id,
+        razorpay_order_id:req.body.razorpay_order_id,
+        razorpay_signature:req.body.razorpay_signature});
+        returnedUser.save();
+        res.send({message:"success"});
     }
-    else {
-      sendResetLink(data.username,data._id);
-    }
+  })
+})
 
-    res.redirect("/register");
-  });
+app.post("/orderselection:customVID",(req,res)=>{
+res.redirect("/formpage"+req.params.customVID);
+})
+//FOR RAZOR PAYMENT PASSING ORDER ID AND TAKING PAYMENTS
 
-  router.patch("/reset", (req, res) => {
-    const thisRequest = getResetRequest(req.body.id);
-    if (thisRequest) {
-        const user = getUser(thisRequest.email);
-        bcrypt.hash(req.body.password, 10).then(hashed => {
-            user.password = hashed;
-            updateUser(user);
-            res.status(204).json();
-        })
-    } else {
-        res.status(404).json();
-    }
-});
 
-  
-  
-  //  if (thisUser) {
-  //     const id = uuidv1();
-  //     const request = {
-  //         id,
-  //         email: thisUser.email,
-  //     };
-  //     createResetRequest(request);
-  //     sendResetLink(thisUser.email, id);
-  // }
-  // res.status(200).json();
-});
+app.post("/formpage:customVID",  (req, res) => {
+  const customVID=req.params.customVID;
+  const file1 = new UserPersonal({
+      fname: req.body.firstName,
+      lname: req.body.lastName,
+      flatno: req.body.flatNo,
+      premiseno: req.body.premiseName,
+      streetname:req.body.roadName,
+      pincode:req.body.pincode,
+      localityname:req.body.locality,
+      townname:req.body.city,
+      statename:req.body.state,
+      mobileno:req.body.mobile
+      });
+    saveFiles1(file1, req.body.cover1)
+    saveFiles1(file1, req.body.cover2)
+    saveFiles1(file1, req.body.cover3)
+    saveFiles1(file1, req.body.cover4)
+    try{
+      User.findOne({_id:customVID},(err,returnedUser)=>{
+      if(err)
+      {console.log(err);}
+      else{
+        returnedUser.userPersonalData.push(file1);
+        returnedUser.save();
+        req.redirect("/");
+      }
+   })
+  }
+  catch{
+    res.redirect("/login");
+  }
+ })
+
+
+
+
+
 
 
 function saveFiles1(file1, coverEncoded) {

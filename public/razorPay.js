@@ -7,6 +7,7 @@ selectedService.addEventListener("change",function(){
 
 
 let amount;
+let product_name;
 let orderID;
 const item1=document.getElementById('checkGetId1');
  item1.addEventListener("click",async function(){
@@ -23,9 +24,11 @@ const item1=document.getElementById('checkGetId1');
     
     if(optionSelected === "ITR"){
         amount=price1;
+        product_name="ITR"
     }
     else if(optionSelected === "GST"){
         amount=price2;
+        product_name="GST"
     }
     console.log(amount);
      
@@ -36,7 +39,8 @@ const item1=document.getElementById('checkGetId1');
         "amount":amount*100,  
         "currency": "INR",
         "receipt": "order_rcptid_11",
-        "payment_capture": '1'
+        "payment_capture": '1',
+        "customVID":customVID
       };
     const orderparams={
                 method:'POST',
@@ -58,7 +62,38 @@ var options = {
     "description": "Test Transaction",
    
     "order_id": orderID, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "callback_url": "https://enbrbemirbei5ge.m.pipedream.net",
+    "handler": function (response){
+        
+        console.log(response.razorpay_payment_id);
+        console.log(response.razorpay_order_id);
+        console.log(response.razorpay_signature);
+        console.log(response);
+                    const paymenturl=`/verify${customVID}`
+                    const paymentdata={
+                        "razorpay_payment_id":response.razorpay_payment_id,  
+                        "razorpay_order_id": response.razorpay_order_id,
+                        "razorpay_signature": response.razorpay_signature,
+                        "customVID":customVID,
+                        "product_name":product_name
+
+                        };
+                    const paymentparams={
+                            method:'POST',
+                            headers:{
+                            'Content-Type':'application/json'
+                                    },
+                             body: JSON.stringify(paymentdata)
+                            };
+                            fetch(paymenturl,paymentparams)
+                            .then(response => response.json())
+                            .then((jsondata)=>{
+                                if(jsondata.message === "success"){
+                                    document.getElementById("stepped").submit();
+                                    console.log(jsondata.message);
+                                }
+                            })
+                             
+                            },
     
     "notes": {
         "address": "Razorpay Corporate Office"
@@ -71,6 +106,7 @@ var rzp1 = new Razorpay(options);
 document.getElementById('rzp-button1').onclick = function(e){
     rzp1.open();
     e.preventDefault();
+
 }
 
 })

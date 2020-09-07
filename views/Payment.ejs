@@ -32,7 +32,7 @@
  <%- include("formdetails/partsComponent/navbar1") -%>
   
     <div class="container">
-    <form id="stepped" action="/formpage" method="post">
+    <form id="stepped" action="/orderselection<%= customVID %>" method="post">
          <div class="row justify-content-center">
                  <div class="col-md-10 position-relative">
                   
@@ -82,6 +82,7 @@
                                     <div class="col-md-6">
                                         <button class="btn btn-primary btn-block" id="rzp-button1">Pay Now</button>
                                     </div>
+                                    
                                 </div>
                         
                              </div> 
@@ -136,7 +137,9 @@
 
 
     <!--====== Main js ======-->
-    <script>var razorPublicKey = '<%= razorPublicKey %>'</script>
+    <script>let razorPublicKey = '<%= razorPublicKey %>'
+    let customVID='<%= customVID %>'
+    </script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script> 
     
     <script src="razorPay.js" defer></script>
