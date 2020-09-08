@@ -239,6 +239,20 @@ app.get("/formpage:customVID",function(req,res){
     });
   })
 
+  app.get("/dashboard:customVID",(req,res)=>{
+    User.findOne({_id:req.params.customVID},(err,data)=>{
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(data.userPersonalData.mobileno);
+        res.render("dashboard",{customVID:req.params.customVID,data:data});
+      }
+    })
+    
+  });
+
+
   app.get("/logout", function(req, res){
     req.logout();
     res.redirect("/");
@@ -449,7 +463,7 @@ app.post("/formpage:customVID",  (req, res) => {
       else{
         returnedUser.userPersonalData.push(file1);
         returnedUser.save();
-        req.redirect("/");
+        res.redirect("/dashboard"+customVID);
       }
    })
   }
@@ -459,7 +473,9 @@ app.post("/formpage:customVID",  (req, res) => {
  })
 
 
+app.post("/dashboard:customVID",(req,res)=>{
 
+})
 
 
 
