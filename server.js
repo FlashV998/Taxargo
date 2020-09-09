@@ -241,12 +241,18 @@ app.get("/formpage:customVID",function(req,res){
 
   app.get("/dashboard:customVID",(req,res)=>{
     User.findOne({_id:req.params.customVID},(err,data)=>{
+      let arr=[];
       if(err){
         console.log(err);
       }
       else{
-        console.log(data.userPersonalData.mobileno);
-        res.render("dashboard",{customVID:req.params.customVID,data:data});
+        
+        console.log(data.userPersonalData[0].savefile1);
+         data.userPersonalData[0].savefile1.forEach(element => {
+         arr.push(element.file1.toString('base64')) 
+        });
+        
+        res.render("dashboard",{customVID:req.params.customVID,data:data,arr:arr});
       }
     })
     

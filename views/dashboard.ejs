@@ -17,7 +17,11 @@
     <!--====== Line Icons CSS ======-->
     <link rel="stylesheet" href="assets/css/LineIcons.css">
         
-    
+    <!-- FILEPND STYLESHEET -->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+
     
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -48,11 +52,13 @@
                                 <br>
                                 <div class="card ">
                                 <div class="card-body">
+                                  
+                                <h6 class="heading-content">Personal Data</h6>
                                     <table class="table table-striped">
                                         
                                         <tbody>
                                           <tr>
-                                            <th scope="row"></th>
+                                            <th scope="row "></th>
                                             <td>Username:</td>
                                             <td><%=data.userPersonalData[0].fname%> <%=data.userPersonalData[0].lname%></td>
                                             
@@ -90,6 +96,21 @@
                                         </tbody>
                                       </table>  
                                  <br>
+                                 <h6 class="heading-content">Uploaded Documents</h6>
+                                 <div class="gap row justify-content-around" style="width: auto;">
+                                   <div class="col-md-4 " ><img style="width: 200px ;" src="data: <%= data.userPersonalData[0].savefile1[0].file1Type%>;charset=utf-8;base64,<%= arr[0]%>">
+                                   </div>
+                                   <div class="col-md-4"><img style="width: 200px ;" src="data: <%= data.userPersonalData[0].savefile1[1].file1Type%>;charset=utf-8;base64,<%= arr[1]%>">
+                                   </div>
+                                 </div>
+
+                                 <div class="gap row justify-content-around">
+                                  <div class="col-md-4 "><img style="width: 200px;" src="data: <%= data.userPersonalData[0].savefile1[2].file1Type%>;charset=utf-8;base64,<%= arr[2]%>">
+                                  </div>
+                                  <div class="col-md-4"><img style="width: 200px;" src="data: <%= data.userPersonalData[0].savefile1[3].file1Type%>;charset=utf-8;base64,<%= arr[3]%>">
+                                  </div>
+                                </div>
+                                      
                                     
                                 </div>
                         
@@ -142,7 +163,9 @@
     <script src="assets/js/jquery.easing.min.js"></script>
     <script src="assets/js/scrolling-nav.js"></script>
  
-
+    <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<script defer src="filePond.js"></script>
 
     <!--====== Main js ======-->
     
