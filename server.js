@@ -196,12 +196,21 @@ app.get("/totalservice:customVID",function(req,res){
               res.status(500).end()
               } 
             else {
-              res.render("Payment", {
-              razorPublicKey: instance.key_id,
-              items: JSON.parse(data),
-              customVID:req.params.customVID
-                });
-              }
+                  User.findOne({_id:req.params.customVID},(err,returneduser)=>{
+                    if(err){console.log(err);}
+
+                    else if(returneduser.orders.length === 0 ){
+                                res.render("Payment", {
+                                razorPublicKey: instance.key_id,
+                                items: JSON.parse(data),
+                                customVID:req.params.customVID
+                                  });        
+                            }
+                    else{
+                        res.redirect("/formpage"+req.params.customVID)}
+                      })
+              
+                  }
           })  
         } 
    else{
@@ -211,7 +220,16 @@ app.get("/totalservice:customVID",function(req,res){
 
 app.get("/formpage:customVID",function(req,res){
   if(req.isAuthenticated()){
-  res.render("formpage",{customVID:req.params.customVID});  
+    User.findOne({_id:req.params.customVID},(err,data)=>{
+      if(data.userPersonalData.length === 0){
+        res.render("formpage",{customVID:req.params.customVID}); 
+      }
+    else{
+        res.redirect("dashboard"+req.params.customVID);     
+    }
+  })
+
+    
     }
   else{
     res.redirect("/login");
@@ -240,23 +258,45 @@ app.get("/formpage:customVID",function(req,res){
   })
 
   app.get("/dashboard:customVID",(req,res)=>{
-    User.findOne({_id:req.params.customVID},(err,data)=>{
-      let arr=[];
-      if(err){
-        console.log(err);
-      }
-      else{
-        
-        console.log(data.userPersonalData[0].savefile1);
-         data.userPersonalData[0].savefile1.forEach(element => {
-         arr.push(element.file1.toString('base64')) 
-        });
-        
-        res.render("dashboard",{customVID:req.params.customVID,data:data,arr:arr});
-      }
-    })
+      let uploadedFiles=[];
+      let products=[];
+      let option_value;
+      fs.readFile('items.json', function(error, data) {
+        if (error) {
+          res.status(500).end()
+          } 
     
-  });
+          else{
+    
+    
+      User.findOne({_id:req.params.customVID},(err,returneduser)=>{
+              if(err){
+                console.log(err);
+                  }
+            else{
+                  returneduser.userPersonalData[0].savefile1.forEach(element => {
+                  uploadedFiles.push(element.file1.toString('base64')) 
+                }); 
+                  returneduser.orders.forEach(element=>{
+                      products.push(element.product_name)
+                  });
+                   
+                        if(products.length === 2){
+                            option_value=1
+                          }
+                          else if(products.includes("ITR")){
+                            option_value=2;
+                          }
+                          else if(products.includes("GST")){
+                            option_value=3;
+                          }
+                  res.render("dashboard",{items: JSON.parse(data),razorPublicKey: instance.key_id,customVID:req.params.customVID,data:returneduser,arr:uploadedFiles,option_value:option_value});
+                  }
+              })
+            }
+          })
+       
+       });
 
 
   app.get("/logout", function(req, res){

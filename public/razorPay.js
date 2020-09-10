@@ -40,7 +40,8 @@ const item1=document.getElementById('checkGetId1');
         "currency": "INR",
         "receipt": "order_rcptid_11",
         "payment_capture": '1',
-        "customVID":customVID
+        "customVID":customVID,
+        "product_name":product_name
       };
     const orderparams={
                 method:'POST',
