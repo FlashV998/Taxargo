@@ -17,10 +17,10 @@ async function sendResetLink(email,id) {
   });
     
   let mailOptions={
-    from: '"Fred Foo 👻" <chetanya002@gmail.com>', // sender address
+    from: '"ADMINISTRATOR" <chetanya002@gmail.com>', // sender address
     to: email, // list of receivers
-    subject: "RESET PASSWORD LINK", // Subject line
-    text: `CLICK THE FOLLOWING LINK TO RESET YOUR PASSWORD,link:http:localhost:3000/resetpassword/${id}`, // plain text body
+    subject: "RESET PASSWORD LINK OF TAXSUPPPORT", // Subject line
+    text: `CLICK THE FOLLOWING LINK TO RESET YOUR PASSWORD,link:http://localhost:3000/reset${id}`, // plain text body
     // html: "<b>Hello world?</b>", // html body
   }
   

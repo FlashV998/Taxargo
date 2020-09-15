@@ -448,7 +448,10 @@ a:hover{
       color: #fff; }
 
 
-
+       .slider-image {
+          max-width: 680px;
+          width: 60%; }
+  
 
 
 
@@ -565,8 +568,6 @@ a:hover{
     }
    }
     */
-
-
     
 /*===========================
       16.PRICING css 

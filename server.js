@@ -461,22 +461,26 @@ app.post("/orders",function(req,res){
 
 
 app.post("/verify:customVID",(req,res)=>{
-console.log(req.body);
-  User.findOne({_id:req.params.customVID},(err,returnedUser)=>{
-    if(err){
-      console.log(err);
-    }
-    else{
-        returnedUser.orders.push({ 
-        product_name:req.body.product_name,  
-        razorpay_payment_id:req.body.razorpay_payment_id,
-        razorpay_order_id:req.body.razorpay_order_id,
-        razorpay_signature:req.body.razorpay_signature});
-        returnedUser.save();
-        res.send({message:"success"});
-    }
+    saveRazorData(req.body,req.params.customVID)
+    .then(res.send({message:"success"}))
+    .catch((err)=>console.log(err));
+ 
   })
-})
+
+  async function saveRazorData(data,customVID){
+    const findUser=User.findOne({_id:customVID},async function(err,returnedUser){
+      returnedUser.orders.push({ 
+      product_name:data.product_name,  
+      razorpay_payment_id:data.razorpay_payment_id,
+      razorpay_order_id:data.razorpay_order_id,
+      razorpay_signature:data.razorpay_signature});
+      const data1= await returnedUser.save();      
+ })
+  
+} 
+
+
+
 
 app.post("/orderselection:customVID",(req,res)=>{
 res.redirect("/formpage"+req.params.customVID);
@@ -486,37 +490,46 @@ res.redirect("/formpage"+req.params.customVID);
 
 app.post("/formpage:customVID",  (req, res) => {
   const customVID=req.params.customVID;
+    saveFormData(req.body,req.params.customVID)
+    .then(res.redirect("/login"))
+    .catch((err)=>console.log(err));
+
+})
+
+
+
+ async function saveFormData(data,customVID){
   const file1 = new UserPersonal({
-      fname: req.body.firstName,
-      lname: req.body.lastName,
-      flatno: req.body.flatNo,
-      premiseno: req.body.premiseName,
-      streetname:req.body.roadName,
-      pincode:req.body.pincode,
-      localityname:req.body.locality,
-      townname:req.body.city,
-      statename:req.body.state,
-      mobileno:req.body.mobile
-      });
-    saveFiles1(file1, req.body.cover1)
-    saveFiles1(file1, req.body.cover2)
-    saveFiles1(file1, req.body.cover3)
-    saveFiles1(file1, req.body.cover4)
-    try{
-      User.findOne({_id:customVID},(err,returnedUser)=>{
-      if(err)
-      {console.log(err);}
-      else{
-        returnedUser.userPersonalData.push(file1);
-        returnedUser.save();
-        res.redirect("/dashboard"+customVID);
-      }
-   })
-  }
-  catch{
-    res.redirect("/login");
-  }
+    fname:         data.firstName,
+    lname:         data.lastName,
+    flatno:        data.flatNo,
+    premiseno:     data.premiseName,
+    streetname:    data.roadName,
+    pincode:       data.pincode,
+    localityname:  data.locality,
+    townname:      data.city,
+    statename:data.state,
+    mobileno:data.mobile
+    });
+  await saveFiles1(file1, data.cover1)
+  await saveFiles1(file1, data.cover2)
+  await saveFiles1(file1, data.cover3)
+  await saveFiles1(file1, data.cover4)
+ 
+  await User.findOne({_id:customVID},async function(err,returnedUser){
+      returnedUser.userPersonalData.push(file1);
+      await returnedUser.save();   
  })
+}
+
+ function saveFiles1(file1, coverEncoded) {
+  if (coverEncoded == null) return
+  const cover = JSON.parse(coverEncoded)
+  if (cover != null && imageMimeTypes.includes(cover.type)) {
+      file1.savefile1.push({file1:new Buffer.from(cover.data, 'base64'),file1Type:cover.type});
+    }
+}
+
 
 
 app.post("/dashboard:customVID",(req,res)=>{
@@ -524,15 +537,6 @@ app.post("/dashboard:customVID",(req,res)=>{
 })
 
 
-
-
-function saveFiles1(file1, coverEncoded) {
-  if (coverEncoded == null) return
-  const cover = JSON.parse(coverEncoded)
-  if (cover != null && imageMimeTypes.includes(cover.type)) {
-      file1.savefile1.push({file1:new Buffer.from(cover.data, 'base64'),file1Type:cover.type});
-    }
-}
 
 
 

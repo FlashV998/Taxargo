@@ -88,9 +88,10 @@ var options = {
                             fetch(paymenturl,paymentparams)
                             .then(response => response.json())
                             .then((jsondata)=>{
+                                console.log(jsondata.message);
                                 if(jsondata.message === "success"){
                                     document.getElementById("stepped").submit();
-                                    console.log(jsondata.message);
+                                    
                                 }
                             })
                              
