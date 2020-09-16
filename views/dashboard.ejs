@@ -29,12 +29,11 @@
 </head>
 <body>
  
- <%- include("formdetails/partsComponent/navbar1") -%>
   
     <div class="container">
    
-         <div class="row justify-content-center">
-                 <div class="col-md-10 position-relative">
+         <div class="gap row justify-content-center">
+                 <div class="col-md-12 position-relative">
                   
                       
                             
@@ -92,61 +91,84 @@
                                  <br>
                                  <h6 class="heading-content">Uploaded Documents</h6>
                                  <div class="gap  row justify-content-around" style="width: auto;">
-                                   <div class="col-md-4 " >
+                                   <div class="col-md-3 " >
                                     <a href="data: <%= data.userPersonalData[0].savefile1[0].file1Type%>;charset=utf-8;base64,<%= arr[0]%>" download><img style="width: 200px ;" src="data: <%= data.userPersonalData[0].savefile1[0].file1Type%>;charset=utf-8;base64,<%= arr[0]%>"></a> 
                                    </div>
-                                   <div class="col-md-4"><img style="width: 200px ;" src="data: <%= data.userPersonalData[0].savefile1[1].file1Type%>;charset=utf-8;base64,<%= arr[1]%>">
+                                   <div class="col-md-3"><img style="width: 200px ;" src="data: <%= data.userPersonalData[0].savefile1[1].file1Type%>;charset=utf-8;base64,<%= arr[1]%>">
                                    </div>
-                                 </div>
+                                   <div class="col-md-3 "><img style="width: 200px;" src="data: <%= data.userPersonalData[0].savefile1[2].file1Type%>;charset=utf-8;base64,<%= arr[2]%>">
+                                   </div>
+                                   <div class="col-md-3"><img style="width: 200px;" src="data: <%= data.userPersonalData[0].savefile1[3].file1Type%>;charset=utf-8;base64,<%= arr[3]%>">
+                                   </div>
+                                  </div>
 
-                                 <div class="gap row justify-content-around">
-                                  <div class="col-md-4 "><img style="width: 200px;" src="data: <%= data.userPersonalData[0].savefile1[2].file1Type%>;charset=utf-8;base64,<%= arr[2]%>">
-                                  </div>
-                                  <div class="col-md-4"><img style="width: 200px;" src="data: <%= data.userPersonalData[0].savefile1[3].file1Type%>;charset=utf-8;base64,<%= arr[3]%>">
-                                  </div>
+
+                                  <br>
+                                  
+                                <div class="payment_service">
+                                  <h6 class="heading-content">Select Another Service.</h6>
+                                  <br>
+                                  <div class="row justify-content-around">
+           
+                                    <div class="col-lg-4 col-md-7 col-sm-9">
+                                        <div class="pricing-style mt-30">
+                                            <div class="pricing-icon text-center">
+                                                <img class="img-thumbnail" src="assets/images/service1.jpg" alt="">
+                                            </div>
+                                            <div class="pricing-header text-center">
+                                                <h5 class="sub-title">ITR-1</h5>
+                                                <p class="month"><span id="priceElement1" class="price"><i class="fa fa-inr" aria-hidden="true"></i> <%= items.products[0].price %></span>/</p>
+                                            </div>
+                                            
+                                               
+                                        </div> <!-- pricing style one -->
+                                    </div>
+                                    
+                                    <div class="col-lg-4 col-md-7 col-sm-9">
+                                        <div class="pricing-style mt-30">
+                                            <div class="pricing-icon text-center">
+                                                <img class="img-thumbnail" src="assets/images/service2.jpg" alt="">
+                                            </div>
+                                            <div class="pricing-header text-center">
+                                                <h5 class="sub-title">GST-Registration</h5>
+                                                <p class="month"><span id="priceElement2" class="price"><i class="fa fa-inr" aria-hidden="true"></i> <%= items.products[1].price %></span>/</p>
+                                            </div>
+                                                                                      
+                                        </div> <!-- pricing style one -->
+                                    </div>
+                                    
+                                     
                                 </div>
-                                    <div class="payment_service">
-                                <div class="gap row justify-content-between ">
-                                  <div class="card text-white bg-success mb-3 col-md-6" style="max-width: 20rem;">
-                                      <div class="card-header text-center">ITR</div>
-                                      <div class="card-body">
-                                      <h4 id="priceElement1" class="card-title"><%= items.products[0].price %></h4>
-                                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                      </div>
-                                  </div>
-                                  <div class="card text-white bg-success mb-3 col-md-6" style="max-width: 20rem;">
-                                      <div class="card-header text-center">GST</div>
-                                      <div class="card-body">
-                                      <h4 id="priceElement2" class="card-title"><%= items.products[1].price %></h4>
-                                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                  </div>
-                                  </div>
-                           </div>
-                                
-                                
-                    
-
-                                <div class="gap row justify-content-between ">
-                                  <div class="form-group col-md-8">
-                                      <label  for="category">Select Your Service</label>
-                                      <select name="E_category" id="selectedService" class="form-control" >
-                                        
-                                        <option value="ITR">File IT-Return</option>
-                                        <option value="GST">File GST</option>
-                                      </select>
-                                  </div>
-                                  <div class="form-group col-md-3 my-4 ">
-                                      <a id="checkGetId1" role="button" class="btn btn-success ">Select</a>
-                                  </div>
+                                   
+                                <div class="gap row justify-content-center">
+                                   
+                                   
+                                    <div class="form-group col-md-8">
+                                        <label class="heading-label" for="category">Select Your Service</label>
+                                        <select name="E_category" id="selectedService" class="form-control">
+                                          <option value="ITR">ITR-1</option>
+                                          <option value="GST">GST-Registration</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2 my-4 ">
+                                        <a id="checkGetId1" role="button" class="btn btn-success ">Select</a>
+                                    </div>
                                 </div>
                                 <div id="paymentButton" class="row justify-content-center hide">
-                                  <div class="col-md-6">
-                                      <button class="btn btn-primary btn-block" id="rzp-button1">Pay Now</button>
-                                  </div>
-                                  
-                              </div>
-              
+                                <div class="col-md-6">
+                                <button class="btn btn-primary btn-block" id="rzp-button1">Pay Now</button>
+                                </div>
+                                
+                                </div>
                             </div> 
+
+
+
+
+
+
+
+
                                 </div>
                         
                              </div> 
@@ -205,7 +227,7 @@
       </script>
       <script src="https://checkout.razorpay.com/v1/checkout.js"></script> 
       
-      <script src="razorPay.js" defer></script>
+      <script src="razorPay1.js" defer></script>
    
    
       // <!--====== Main js ======-->
