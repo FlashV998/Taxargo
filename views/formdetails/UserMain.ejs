@@ -1,8 +1,5 @@
-<section class="inner-section-step">
-    <div class="progress my-3">
-      <div class="progress-done progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Personal-Info</div>
-    </div>
-    <br>
+<section class="gap inner-section-step">
+    
     
     <div class="blue steps step-shadow-box step-shadow-box-1">
       <div class="p-3 bg-white shadow-lg rounded-sm">
@@ -17,12 +14,12 @@
   
             <div class="form-row justify-content-around">
               <div class="form-group col-md-4">
-                <label for="firstname">FirstName</label>
+                <label for="firstname">FirstName*</label>
                 <input name="firstName" id="firstName" type="text" class="form-control" required placeholder="firstname">
               </div>  
               
               <div class="form-group col-md-4">
-                <label for="lastname">LastName</label>
+                <label for="lastname">LastName*</label>
                 <input name="lastName" id="lastName" type="lname" class="form-control"  required placeholder="lastname">
               </div>
             </div>
@@ -36,29 +33,29 @@
                 <div class="form-group col-md-4">
                   <label for="premise">Premise Name(optional).
                   </label>
-                  <input name="premiseName" id="premiseName" type="text" class="form-control"  required>
+                  <input name="premiseName" id="premiseName" type="text" class="form-control"  >
                 </div>
               </div>
     
               <div class="form-row justify-content-around">
                 <div class="form-group col-md-4">
-                  <label for="street">Road/Street(optional).</label>
+                  <label for="street">Road/Street*</label>
                   <input name="roadName" id="roadName" type="text" class="form-control"  required>
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="pincode">Pincode
+                  <label for="pincode">Pincode*
                   </label>
-                  <input name="pincode" id="pincode" type="text" class="form-control"  required>
+                  <input name="pincode" id="pincode" type="number" class="form-control"  required>
                 </div>
               </div>
     
               <div class="form-row justify-content-around">
                 <div class="form-group col-md-4">
-                  <label for="locality">Area/Locality *</label>
+                  <label for="locality">Area/Locality*</label>
                   <input name="locality" id="locality" type="text" class="form-control" required>
                 </div>
                 <div class="form-group col-md-4">
-                  <label for="city">Town / City *
+                  <label for="city">Town/City*
                   </label>
                   <input name="city" id="city" type="text" class="form-control" required>
                 </div>
@@ -68,7 +65,7 @@
              
               <div class="form-row justify-content-around">
                 <div class="form-group col-md-4">
-                <label for="state">State</label>
+                <label for="state">State*</label>
                 <select name="state" id="state" class="form-control">
                     
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -111,8 +108,8 @@
               </div>
                
             <div class="form-group col-md-4">
-              <label for="mobile">Mobile-No</label>
-              <input name="mobile" id="mobile" type="text" class="form-control"  placeholder="+91xxxxxxxxxx" max="9999999999">
+              <label for="mobile">Mobile-No*</label>
+              <input name="mobile" id="mobile" type="number" class="form-control"  placeholder="+91xxxxxxxxxx" max="9999999999">
               <p class="heading-description-1">Write your Mobile-No without code.</p>
               </div>
             </div>
@@ -137,6 +134,7 @@
                           </div>
                     </div> -->
                     <h6 class="heading-content">Upload YOUR FILES</h6>
+                    <p class="heading-label text-center">All files should be in either .jpeg/.jpg or.png format.</p>
                     <div class="gap row justify-content-around">
                         <div class="col-md-4">
                             <label  for="category">Upload Aadhar File</label>
@@ -159,6 +157,12 @@
                     </div>
         </div>
         </div>
+        <div  class="row justify-content-center " style="margin-top: 2rem;">
+          <div class="col-md-6">
+              <button class="btn btn-primary btn-block" type="submit">SUBMIT</button>
+          </div>
+          
+      </div>
         </div>
         </div>
          </section>
