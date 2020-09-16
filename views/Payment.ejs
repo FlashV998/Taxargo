@@ -22,35 +22,106 @@
 
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+     <link rel="stylesheet" href="styles.css"> 
+      
+     <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
     <script src="https://use.fontawesome.com/4301952e86.js"></script>
     
    
 </head>
-<body>
+<body style="
+background: #007bff;
+background: linear-gradient(to right, #0062E6, #33AEFF);"
+>
  
- <%- include("formdetails/partsComponent/navbar1") -%>
   
     <div class="container">
     <form id="stepped" action="/orderselection<%= customVID %>" method="post">
-         <div class="row justify-content-center">
-                 <div class="col-md-10 position-relative">
+         <div class=" gap1 row justify-content-center">
+                 <div class="col-md-12 position-relative">
                   
-                        <section class="inner-section-step">
-                            <div class="progress my-3">
-                              <div class="progress-done progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Personal-Info</div>
-                            </div>
-                            <br>
+                        <section class="inner-section-step active">
                             
                             <div class="blue steps step-shadow-box step-shadow-box-1">
                               <div class="p-3 bg-white shadow-lg rounded-sm">
                                 <br>
-                                <h5 class="heading-H">Personal-Info</h5>
+                                <h5 class="heading-H">Services-Offered</h5>
                                 <hr class="separator--line" />
                                 <br>
-                                <div class="card ">
-                              <div class="card-body">
-                                  <div class="gap row justify-content-between">
+
+<!-- asdfg -->
+<div class="row justify-content-around">
+           
+    <div class="col-lg-4 col-md-7 col-sm-9">
+        <div class="pricing-style mt-30">
+            <div class="pricing-icon text-center">
+                <img class="img-thumbnail" src="assets/images/service1.jpg" alt="">
+            </div>
+            <div class="pricing-header text-center">
+                <h5 class="sub-title">ITR-1</h5>
+                <p class="month"><span id="priceElement1" class="price"><i class="fa fa-inr" aria-hidden="true"></i> <%= items.products[0].price %></span>/</p>
+            </div>
+            <div class="pricing-list ">
+                <ul>
+                    <li style="padding-left:3em">Easy Uploading.</li>
+                    <li style="padding-left:3em">Easy Submission.</li>
+                    <li style="padding-left:3em">One-Click-Filing.</li>
+                </ul>
+            </div>
+               
+        </div> <!-- pricing style one -->
+    </div>
+    
+    <div class="col-lg-4 col-md-7 col-sm-9">
+        <div class="pricing-style mt-30">
+            <div class="pricing-icon text-center">
+                <img class="img-thumbnail" src="assets/images/service2.jpg" alt="">
+            </div>
+            <div class="pricing-header text-center">
+                <h5 class="sub-title">GST-Registration</h5>
+                <p class="month"><span id="priceElement2" class="price"><i class="fa fa-inr" aria-hidden="true"></i> <%= items.products[1].price %></span>/</p>
+            </div>
+            <div class="pricing-list">
+                <ul>
+                    <li  style="padding-left:3em"></i>Register Yourself.</li>
+                    <li style="padding-left:3em">Pay for the service.</li>
+                    <li style="padding-left:3em">Upload the Documents.</li>
+                    
+                </ul>
+            </div>
+            
+        </div> <!-- pricing style one -->
+    </div>
+    
+     
+</div>
+   
+<div class="gap row justify-content-center">
+   
+   
+    <div class="form-group col-md-8">
+        <label class="heading-label" for="category">Select Your Service</label>
+        <select name="E_category" id="selectedService" class="form-control">
+          <option value="ITR">ITR-1</option>
+          <option value="GST">GST-Registration</option>
+        </select>
+    </div>
+    <div class="form-group col-md-2 my-4 ">
+        <a id="checkGetId1" role="button" class="btn btn-success ">Select</a>
+    </div>
+</div>
+<div id="paymentButton" class="row justify-content-center hide">
+<div class="col-md-6">
+<button class="btn btn-primary btn-block" id="rzp-button1">Pay Now</button>
+</div>
+
+</div>
+
+
+                                <!-- Zxc -->
+                                <!-- <div class="card "> -->
+                              <!-- <div class="card-body"> -->
+                                  <!-- <div class="gap row justify-content-between">
                                         <div class="card text-white bg-success mb-3 col-md-6" style="max-width: 20rem;">
                                             <div class="card-header text-center">ITR</div>
                                             <div class="card-body">
@@ -65,31 +136,16 @@
                                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                         </div>
                                         </div>
-                                 </div>
-                                 <div class="gap row justify-content-between">
-                                                <div class="form-group col-md-8">
-                                                    <label  for="category">Select Your Service</label>
-                                                    <select name="E_category" id="selectedService" class="form-control">
-                                                      <option value="ITR">File IT-Return</option>
-                                                      <option value="GST">File GST</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-3 my-4 ">
-                                                    <a id="checkGetId1" role="button" class="btn btn-success ">Select</a>
-                                                </div>
-                                </div>
-                                <div id="paymentButton" class="row justify-content-center hide">
-                                    <div class="col-md-6">
-                                        <button class="btn btn-primary btn-block" id="rzp-button1">Pay Now</button>
-                                    </div>
-                                    
-                                </div>
+                                 </div> -->
+                                 
                         
-                             </div> 
-                         <br>    
+                             <!-- </div>  -->
+                         <!-- <br>     -->
                                 
-                                </div>
-                                </div>
+                                <!-- </div> -->
+                                
+                            
+                            </div>
                         </section>
                     
                 
@@ -137,7 +193,8 @@
 
 
     <!--====== Main js ======-->
-    <script>let razorPublicKey = '<%= razorPublicKey %>'
+    <script>
+    let razorPublicKey = '<%= razorPublicKey %>'
     let customVID='<%= customVID %>'
     </script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script> 

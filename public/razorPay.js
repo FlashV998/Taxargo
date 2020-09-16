@@ -21,8 +21,7 @@ const item1=document.getElementById('checkGetId1');
     // const vall=parseInt(price);
     let price1 = parseFloat(priceElement1.innerText)
     let price2 = parseFloat(priceElement2.innerText)
-    
-    if(optionSelected === "ITR"){
+ if(optionSelected === "ITR"){
         amount=price1;
         product_name="ITR"
     }
@@ -30,7 +29,7 @@ const item1=document.getElementById('checkGetId1');
         amount=price2;
         product_name="GST"
     }
-    console.log(amount);
+    
      
     // console.log(price);
 
