@@ -3,30 +3,34 @@ const nodemailer = require("nodemailer");
 
 async function sendResetLink(email,id) {
   
-    let testAccount = await nodemailer.createTestAccount();
+    // let testAccount = await nodemailer.createTestAccount();
 
   let transporter = nodemailer.createTransport({
-    // host: "smtp.ethereal.email",
-    // port: 587,
+    host: "smtpout.secureserver.net",
+    // 
     // secure: false, // true for 465, false for other ports
-    service:'gmail',
+    service:"Godaddy",
+    port: 25,
+    secure: false,
+    requireTLS:true,
+    debug: true,
     auth: {
-      user: 'chetanya002@gmail.com', // generated ethereal user
-      pass: process.env.GMAILPASS, // generated ethereal password
+      user: process.env.EMAIL_ADDRESS, // generated ethereal user
+      pass: process.env.EMAIL_PASS, // generated ethereal password
     },
   });
     
   let mailOptions={
-    from: '"ADMINISTRATOR" <chetanya002@gmail.com>', // sender address
+    from: 'Taxargo <support@taxargo.com>', // sender address
     to: email, // list of receivers
     subject: "RESET PASSWORD LINK OF TAXSUPPPORT", // Subject line
-    text: `CLICK THE FOLLOWING LINK TO RESET YOUR PASSWORD,link:http://localhost:3000/reset${id}`, // plain text body
-    // html: "<b>Hello world?</b>", // html body
+    html: `<b>CLICK THE FOLLOWING LINK TO RESET YOUR PASSWORD,link:http://localhost:3000/reset${id}</b>`, // html body
+    text: `CLICK THE FOLLOWING LINK TO RESET YOUR PASSWORD,link:http://taxargo.com/reset${id}` // plain text body
   }
   
   let info = await transporter.sendMail(mailOptions,(error)=>{
-      if(err){
-          console.log(err);
+      if(error){
+          console.log(error);
       }
     
   });

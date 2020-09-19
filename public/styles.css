@@ -151,19 +151,19 @@ text-align: left;
   margin-top: 8rem;
  } */
 
- .inner-section-step{
+ /* .inner-section-step{ */
     
   /* width: 0;
   height: 100%;
   top: 0;
   left: 0; */
-  z-index: -1;
+  /* z-index: -1;
   opacity: 0;
   display: none;
   transition: all 0.4s ease-in-out;
  }
- 
- .inner-section-step.active{
+  */
+ .inner-section-step{
   margin-top: 8rem;
   /* overflow: visible; */
   /* width: 100%; */

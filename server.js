@@ -16,11 +16,12 @@ const Razorpay=require('razorpay');
 const sendResetLink = require("./resetPasswordMail");
 const flash = require('connect-flash');
 let instance = new Razorpay({
-  key_id: 'rzp_test_6Mo0ReH3m1D3F8', // your `KEY_ID`
-  key_secret: '3yeb9Qj5AmUve2f0nbFQVqXR' // your `KEY_SECRET`
+  key_id: process.env.KEY_ID, // your `KEY_ID`
+  key_secret: process.env.KEY_SECRET // your `KEY_SECRET`
 })
 const cors = require('cors');
 const { log } = require('console');
+const { isError } = require('util');
 
 const app = express();
 app.use(cors())
@@ -33,7 +34,7 @@ app.use(bodyParser.urlencoded({limit: '50mb',extended: true}));
 
 
 app.use(session({
-  secret: process.env.SECRET,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
@@ -41,6 +42,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+
 
 mongoose.connect("mongodb://localhost:27017/rtiUserdb", {useNewUrlParser: true,useUnifiedTopology: true});
 mongoose.set("useCreateIndex", true);
@@ -148,7 +151,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/formpage",
+    callbackURL: "http://taxargo.com/auth/google/totalservice:customVID",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile,cb) {
@@ -171,11 +174,11 @@ app.get("/auth/google",
   passport.authenticate('google', { scope: ["profile","email"] })
 );
 
-app.get("/auth/google/totalservice",
+app.get("/auth/google/totalservice:customVID",
   passport.authenticate('google', { failureRedirect: "/login" }),
   function(req, res) {
     // Successful authentication, redirect to secrets.
-    res.redirect("/totalservice");
+    res.redirect("/totalservice"+req.params.customVID);
   });
 
   app.get("/register", function(req, res){
@@ -189,39 +192,40 @@ app.get("/login", function(req, res){
 });
 
 
-app.get("/totalservice:customVID",function(req,res){
+app.get("/totalservice:customVID",function(req,res,next){
+  
   if(req.isAuthenticated()){
-        fs.readFile('items.json', function(error, data) {
-            if (error) {
-              res.status(500).end()
-              } 
-            else {
-                  User.findOne({_id:req.params.customVID},(err,returneduser)=>{
-                    if(err){console.log(err);}
-
-                    else if(returneduser.orders.length === 0 ){
+        fs.readFile('items.json', function(error,data) {
+                if(error){
+                      next(error);
+                    }
+                  
+                 User.findOne({_id:req.params.customVID},(err,returneduser)=>{
+                  if(err){ next(error);}
+                           if(returneduser.orders.length === 0 ){
                                 res.render("Payment", {
                                 razorPublicKey: instance.key_id,
                                 items: JSON.parse(data),
                                 customVID:req.params.customVID
                                   });        
                             }
-                    else{
-                        res.redirect("/formpage"+req.params.customVID)}
-                      })
-              
-                  }
-          })  
-        } 
-   else{
-    res.redirect("/login");
-  }    
-})
+                        else{
+                            res.redirect("/formpage"+req.params.customVID)}
+                            });
+                    })  
+                } 
+    else{res.redirect("/login");}    
+  
+  // catch(e){
+  //   console.log("heloo"+e.message);
+  // }
+
+  });
 
 app.get("/formpage:customVID",function(req,res){
   if(req.isAuthenticated()){
     User.findOne({_id:req.params.customVID},(err,data)=>{
-      if(data.userPersonalData.length === 0){
+      if(data.userPersonalData.length === 0 ){
         res.render("formpage",{customVID:req.params.customVID}); 
       }
     else{
@@ -538,7 +542,15 @@ app.post("/dashboard:customVID",(req,res)=>{
 
 
 
-
+app.use(function(err,req,res,next){
+  res.status(err.status || 500);
+  res.send({
+    error:{
+      status:err.status,
+      message:err.message+"lol"
+    }
+  });
+});
 
 
 app.listen(3000, function() {
