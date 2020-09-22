@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: taxargo
+    environment:
+      - APPLICATION_PORT=3310
+      - DATABASE_URL=mongodb://host.docker.internal:27017/rtiUserdb
+      - DATABASE_SSL=false
+      - FOREST_AUTH_SECRET=de4c7c15fdb3fc2914d25fada4fb514038895e07afc7dbfe647b8795cab1deee84842fbf7683a9c95a8eea2594373d13
+      - FOREST_ENV_SECRET=ed5abaaa40b41806a2d1a974a162f3b4baa2101b60319d27ba05d0e5e1b582b3
+    ports:
+      - "3310:3310"
+    volumes:
+      - ./:/usr/src/app

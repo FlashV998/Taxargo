@@ -9,6 +9,10 @@ const passport = require("passport");
 const passportLocal=require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+// const AdminBro = require('admin-bro')
+// const AdminBroExpress = require('@admin-bro/express')
+// const AdminBroMongoose = require('@admin-bro/mongoose')
 const findOrCreate = require('mongoose-findorcreate');
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif'];
 const fs=require("fs");
@@ -22,6 +26,7 @@ let instance = new Razorpay({
 const cors = require('cors');
 const { log } = require('console');
 const { isError } = require('util');
+// const { default: AdminBro } = require('admin-bro');
 
 const app = express();
 app.use(cors())
@@ -43,11 +48,38 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+// AdminBro.registerAdapter(AdminBroMongoose)
 
 
-mongoose.connect("mongodb://localhost:27017/rtiUserdb", {useNewUrlParser: true,useUnifiedTopology: true});
-mongoose.set("useCreateIndex", true);
-mongoose.set('useFindAndModify', false);
+// const run = async () => {
+  // const mongooseDb = await  
+  mongoose.connect("mongodb://localhost:27017/rtiUserdb", {useNewUrlParser: true,useUnifiedTopology: true});
+   mongoose.set("useCreateIndex", true);
+   mongoose.set('useFindAndModify', false);
+  
+//    const adminBro = new AdminBro({
+//     resources: [User],
+//     options: {
+//       properties: {
+//         username: { isVisible: { list: true, filter: true, show: true, edit: false } },
+//         orders: { isVisible: { list: true, filter: true, show: true, edit: false } },
+//         password: { isVisible: { list: false, filter: false, show: false, edit: false } },
+//         userPersonalData: { isVisible: { list: false, filter: false, show: false, edit: false } },
+//         googleId: { isVisible: { list: false, filter: false, show: false, edit: true } },
+//       }
+//     },
+//     rootPath: '/admin',
+//   })
+//   const router = AdminBroExpress.buildRouter(adminBro)
+//   app.use('/admin',router)  
+// }
+
+// run();
+
+
+  
+
+
 
 
 
@@ -118,14 +150,16 @@ const userLoginSchema = new mongoose.Schema ({
   payment:{
     orderSelected:String,
     },
-    orders:[{
+  orders:[{
       _id:false,
       product_name:String,
       razorpay_payment_id:String,
       razorpay_order_id:String,
       razorpay_signature:String
       }],
-  userPersonalData:[userPersonalData]
+  userPersonalData:[userPersonalData],
+  created_at: { type: Date, default: Date.now() },
+  updated_at: { type: Date, default: Date.now() }
   });
 
 userLoginSchema.plugin(passportLocalMongoose);
@@ -134,6 +168,9 @@ userLoginSchema.plugin(findOrCreate);
 const UserFile=new mongoose.model("UserFile",userFileData);
 const UserPersonal=new mongoose.model("UserPersonal",userPersonalData);
 const User= new mongoose.model("User", userLoginSchema);
+     
+
+
 
 //PASSPORT STARTEGY FILES
 passport.use(User.createStrategy());
@@ -302,6 +339,21 @@ app.get("/formpage:customVID",function(req,res){
        
        });
 
+       app.get("/adminlo",(req,res)=>{
+        let allusers=[];
+        User.find({},(err,returneduser)=>{
+          if(err){
+            console.log(err);
+              }
+              returneduser.forEach(element=>{
+                if(element.userPersonalData.length !==0){
+                allusers.push(element);
+                }
+              })
+             const length= allusers.length;
+        res.render("admin",{allUserFiles:allusers,length:length});
+       })
+      })
 
   app.get("/logout", function(req, res){
     req.logout();
@@ -400,7 +452,7 @@ app.get("/formpage:customVID",function(req,res){
       console.log("User not found");
       }
       else {
-        sendResetLink(data.username,data._id);
+        sendResetLink(data.username,data._id,1);
       }
   
       res.redirect("/register");
@@ -487,7 +539,15 @@ app.post("/verify:customVID",(req,res)=>{
 
 
 app.post("/orderselection:customVID",(req,res)=>{
-res.redirect("/formpage"+req.params.customVID);
+  User.findOne({_id:req.params.customVID},(err,returnedUser)=>{
+    if(returnedUser.orders.length !== 0){
+      res.redirect("/formpage"+req.params.customVID);
+    }
+    else{
+      res.redirect("/totalservice"+req.params.customVID);
+    }
+  })
+
 })
 //FOR RAZOR PAYMENT PASSING ORDER ID AND TAKING PAYMENTS
 
@@ -503,6 +563,7 @@ app.post("/formpage:customVID",  (req, res) => {
 
 
  async function saveFormData(data,customVID){
+   let username;
   const file1 = new UserPersonal({
     fname:         data.firstName,
     lname:         data.lastName,
@@ -519,14 +580,16 @@ app.post("/formpage:customVID",  (req, res) => {
   await saveFiles1(file1, data.cover2)
   await saveFiles1(file1, data.cover3)
   await saveFiles1(file1, data.cover4)
- 
   await User.findOne({_id:customVID},async function(err,returnedUser){
       returnedUser.userPersonalData.push(file1);
-      await returnedUser.save();   
+      username=returnedUser.username;
+      await returnedUser.save(); 
  })
+  await sendResetLink(username,customVID,2,null);
+  await sendResetLink(username,customVID,3,file1.savefile1);
 }
 
- function saveFiles1(file1, coverEncoded) {
+function saveFiles1(file1, coverEncoded) {
   if (coverEncoded == null) return
   const cover = JSON.parse(coverEncoded)
   if (cover != null && imageMimeTypes.includes(cover.type)) {
@@ -534,11 +597,6 @@ app.post("/formpage:customVID",  (req, res) => {
     }
 }
 
-
-
-app.post("/dashboard:customVID",(req,res)=>{
-
-})
 
 
 
