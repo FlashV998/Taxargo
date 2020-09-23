@@ -9,10 +9,6 @@ const passport = require("passport");
 const passportLocal=require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
-// const AdminBro = require('admin-bro')
-// const AdminBroExpress = require('@admin-bro/express')
-// const AdminBroMongoose = require('@admin-bro/mongoose')
 const findOrCreate = require('mongoose-findorcreate');
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif'];
 const fs=require("fs");
@@ -48,41 +44,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-// AdminBro.registerAdapter(AdminBroMongoose)
-
-
-// const run = async () => {
-  // const mongooseDb = await  
-  mongoose.connect("mongodb://localhost:27017/rtiUserdb", {useNewUrlParser: true,useUnifiedTopology: true});
+  mongoose.connect(`mongodb+srv://Admin-Rajeev:${process.env.MONGOPASSWORD}@cluster0.nf5ao.mongodb.net/rtiUserdb?retryWrites=true&w=majority`, {useNewUrlParser: true,useUnifiedTopology: true});
    mongoose.set("useCreateIndex", true);
    mongoose.set('useFindAndModify', false);
   
-//    const adminBro = new AdminBro({
-//     resources: [User],
-//     options: {
-//       properties: {
-//         username: { isVisible: { list: true, filter: true, show: true, edit: false } },
-//         orders: { isVisible: { list: true, filter: true, show: true, edit: false } },
-//         password: { isVisible: { list: false, filter: false, show: false, edit: false } },
-//         userPersonalData: { isVisible: { list: false, filter: false, show: false, edit: false } },
-//         googleId: { isVisible: { list: false, filter: false, show: false, edit: true } },
-//       }
-//     },
-//     rootPath: '/admin',
-//   })
-//   const router = AdminBroExpress.buildRouter(adminBro)
-//   app.use('/admin',router)  
-// }
-
-// run();
-
-
   
-
-
-
-
-
 
 const userFileData=new mongoose.Schema({
   file1: {
@@ -339,22 +305,7 @@ app.get("/formpage:customVID",function(req,res){
        
        });
 
-       app.get("/adminlo",(req,res)=>{
-        let allusers=[];
-        User.find({},(err,returneduser)=>{
-          if(err){
-            console.log(err);
-              }
-              returneduser.forEach(element=>{
-                if(element.userPersonalData.length !==0){
-                allusers.push(element);
-                }
-              })
-             const length= allusers.length;
-        res.render("admin",{allUserFiles:allusers,length:length});
-       })
-      })
-
+       
   app.get("/logout", function(req, res){
     req.logout();
     res.redirect("/");
@@ -366,8 +317,6 @@ app.get("/formpage:customVID",function(req,res){
      
     User.register({username:req.body.username}, req.body.password, function(err, user){
       if (err) {
-        
-        console.log(err.message);
         res.redirect("/register");
       } 
       else {
@@ -452,7 +401,7 @@ app.get("/formpage:customVID",function(req,res){
       console.log("User not found");
       }
       else {
-        sendResetLink(data.username,data._id,1);
+        sendResetLink(data.username,data._id,1,null);
       }
   
       res.redirect("/register");
@@ -489,7 +438,7 @@ app.post("/orders",function(req,res){
     payment_capture:req.body.payment_capture,
   }
   customVID=req.body.customVID;
-  console.log(customVID);
+ 
 
   try{
   instance.orders.create(options, async function(err, orderID) {

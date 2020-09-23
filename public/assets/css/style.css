@@ -1635,9 +1635,10 @@ custom css */
   /* background-color: #000000; */
   
   /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-
+  
+  
   .footer-area {
-    background-color:#000000;
+    background-color:#f6f6f6;
     background-image:url("/assets/images/footertexture.png");
     padding-top: 90px;
     padding-bottom: 120px; }

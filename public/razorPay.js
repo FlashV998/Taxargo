@@ -12,7 +12,7 @@ let orderID;
 const item1=document.getElementById('checkGetId1');
  item1.addEventListener("click",async function(){
     paymentButton.classList.remove("hide");
-    const orderurl="http://localhost:3000/orders"
+    const orderurl="http://taxargo.com/orders"
     // const amount= $("#selectedService :selected").getattribute('value');
     const optionSelected=$("#selectedService").find(':selected').attr('value');
     // var price = parseFloat(priceElement.innerText.replace('$', '')) * 100
@@ -58,8 +58,8 @@ var options = {
     "key": razorPublicKey, // Enter the Key ID generated from the Dashboard
     "amount": amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     "currency": "INR",
-    "name": "Chetanya",
-    "description": "Test Transaction",
+    "name": "Taxargo",
+    "description": "Real Transaction",
    
     "order_id": orderID, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
@@ -100,7 +100,7 @@ var options = {
         "address": "Razorpay Corporate Office"
     },
     "theme": {
-        "color": "#F37254"
+        "color": "#528FF0"
     }
 };
 var rzp1 = new Razorpay(options);

@@ -204,8 +204,8 @@
     "liana_version": "6.3.8",
     "engine": "nodejs",
     "engine_version": "12.14.1",
-    "framework": "other",
-    "framework_version": null,
+    "framework": "express",
+    "framework_version": "~4.16.3",
     "orm_version": "5.8.13"
   }
 }
